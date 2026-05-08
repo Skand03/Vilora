@@ -5,6 +5,6 @@ import com.org.vilora.pojo.ExamplePojo;
 
 public interface ExampleService {
 
-	public void register(Example example);
+	public Example save(ExamplePojo examplePojo);
 	public ExamplePojo getById(String id);
 }

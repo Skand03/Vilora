@@ -1,8 +1,11 @@
 package com.org.vilora.dtoHelper;
 
+import org.springframework.stereotype.Component;
+
 import com.org.vilora.model.Example;
 import com.org.vilora.pojo.ExamplePojo;
 
+@Component
 public class ExampleDto {
 
 	public ExamplePojo toPojo(Example example){
