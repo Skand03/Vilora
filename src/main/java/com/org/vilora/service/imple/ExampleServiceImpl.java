@@ -15,12 +15,15 @@ public class ExampleServiceImpl implements ExampleService {
 	@Autowired
 	ExampleRepository egRepo;
 	
+	@Autowired
 	ExampleDto egDto;
 
 	@Override
-	public void register(Example example) {
-		egDto.toPojo(example);
-		egRepo.save(example);
+	public Example save(ExamplePojo examplePojo) {
+		Example eg = egDto.toModel(examplePojo);
+		egRepo.save(eg);
+		
+		return eg;
 	}
 
 	@Override
