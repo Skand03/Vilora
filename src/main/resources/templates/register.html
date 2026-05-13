@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+   </head>
+<body>
+<section>
+    <div class="container p-2">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-header text-center fs-4"> Register Page</div>
+
+                    <div th:if="${message}"
+                         class="alert alert-success"
+                         id="msg">
+
+                        <span th:text="${message}"></span>
+
+                    </div>
+
+                    <script>
+                        setTimeout(() => {
+                            const msg = document.getElementById('msg');
+                            if(msg){
+                                msg.style.display = 'none';
+                            }
+                        }, 3000);
+                    </script>
+
+                    <div class="card-body">
+                        <form action="/auth/createUser" method="post">
+
+                            <div class="mb-3">
+
+                                <label for="fullName" class="form-label">
+                                    Enter Full Name
+                                </label>
+
+                                <input type="text"
+                                       id="fullName"
+                                       name="fullName"
+                                       class="form-control"
+                                       placeholder="Enter your full name">
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="email" class="form-label">
+                                    Enter Email
+                                </label>
+
+                                <input type="email"
+                                       id="email"
+                                       name="email"
+                                       class="form-control"
+                                       placeholder="Enter your email">
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="address" class="form-label">
+                                    Enter Address
+                                </label>
+
+                                <input type="text"
+                                       id="address"
+                                       name="address"
+                                       class="form-control"
+                                       placeholder="Enter your address">
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="qualification" class="form-label">
+                                    Enter Qualification
+                                </label>
+
+                                <input type="text"
+                                       id="qualification"
+                                       name="qualification"
+                                       class="form-control"
+                                       placeholder="Enter qualification">
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="Password" class="form-label">
+                                    Enter Password
+                                </label>
+
+                                <input type="text"
+                                       id="Password"
+                                       name="Password"
+                                       class="form-control"
+                                       placeholder="Enter Password">
+
+                            </div>
+
+                            <button class="btn btn-primary col-md-12v ">
+                                Register
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>

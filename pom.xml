@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.6</version>
+        <version>3.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.org</groupId>
@@ -56,6 +56,14 @@
 	        <artifactId>postgresql</artifactId>
 	        <scope>runtime</scope>
 	    </dependency>
+
+        <!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
 	
 	    <dependency>
 	        <groupId>org.projectlombok</groupId>
@@ -69,20 +77,26 @@
 	        <scope>test</scope>
 	    </dependency>
 	
-		<dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-jasper</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>jakarta.servlet.jsp.jstl</groupId>
-		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.glassfish.web</groupId>
-		    <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--		    <groupId>org.apache.tomcat.embed</groupId>-->
+<!--		    <artifactId>tomcat-embed-jasper</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--		    <groupId>jakarta.servlet.jsp.jstl</groupId>-->
+<!--		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--		    <groupId>org.glassfish.web</groupId>-->
+<!--		    <artifactId>jakarta.servlet.jsp.jstl</artifactId>-->
+<!--		</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
 	</dependencies>
 
 	<build>
