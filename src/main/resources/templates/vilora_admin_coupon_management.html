@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500;600&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#d4af37",
+                        "on-secondary-container": "#96bdb7",
+                        "on-primary-container": "#554300",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#b4b2b2",
+                        "on-surface-variant": "#d0c5af",
+                        "primary": "#f2ca50",
+                        "on-secondary-fixed-variant": "#284d48",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#99907c",
+                        "on-primary-fixed": "#241a00",
+                        "error-container": "#93000a",
+                        "on-secondary": "#0f3632",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-tint": "#e9c349",
+                        "surface-container-low": "#1f1b13",
+                        "tertiary": "#d0cdcd",
+                        "surface-variant": "#38342b",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#eae1d4",
+                        "inverse-surface": "#eae1d4",
+                        "on-background": "#eae1d4",
+                        "secondary-fixed": "#c3eae4",
+                        "inverse-primary": "#735c00",
+                        "surface-dim": "#16130b",
+                        "surface": "#16130b",
+                        "surface-container-lowest": "#110e07",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "secondary-container": "#284d48",
+                        "background": "#16130b",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-container": "#231f17",
+                        "secondary": "#a7cec8",
+                        "surface-container-highest": "#38342b",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#a7cec8",
+                        "outline-variant": "#4d4635",
+                        "on-tertiary-container": "#454544",
+                        "primary-fixed": "#ffe088",
+                        "surface-container-high": "#2d2a21",
+                        "on-primary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#343027",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#3d392f",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "container-padding": "32px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "unit": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Noto Serif"],
+                        "h1": ["Noto Serif"],
+                        "h3": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "data-ui": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "data-ui": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(16px);
+            border: 0.5px solid rgba(212, 175, 55, 0.1);
+        }
+        .premium-border-top {
+            border-top: 4px solid #d4af37;
+        }
+        .organic-pip {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            box-shadow: 0 0 8px currentColor;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-outline-variant/20 bg-surface flex flex-col h-screen overflow-y-auto z-50">
+<div class="px-lg py-xl">
+<h1 class="font-h3 text-h3 font-medium text-primary">Vilora Naturals</h1>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-widest mt-xs">Luxury Organics Admin</p>
+</div>
+<nav class="flex-1 px-sm space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span>Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">reorder</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">rate_review</span>
+<span>Reviews</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-gradient-to-r from-secondary-container/30 to-transparent border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span>Coupons</span>
+</a>
+</nav>
+<div class="px-sm py-lg border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<div class="mt-lg px-4">
+<button class="w-full bg-secondary-container text-secondary py-sm rounded-lg font-data-ui hover:bg-primary-container hover:text-on-primary-container transition-all">
+                    View Storefront
+                </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 overflow-y-auto">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 flex justify-between items-center px-lg py-sm h-16">
+<div class="flex items-center gap-lg flex-1">
+<div class="relative w-full max-w-md focus-within:ring-1 focus-within:ring-primary/50 rounded-full transition-all">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-full py-2 pl-12 text-body-md focus:ring-0" placeholder="Search promotions..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">settings</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="Close up professional headshot of a luxury brand administrator in a minimalist dark suit against a charcoal grey background. The lighting is soft and directional, highlighting textures and depth. The aesthetic is clean and authoritative, fitting for a high-end organics administrative portal." src="https://lh3.googleusercontent.com/aida/ADBb0ugCp7gfkwyITHwGwgjMC8kzQhiWQaJXE7GQWGzAhYC8F8xGivftj2TU47AR6362aIDATaYQvceqPCR94SK2Efya9emrgcmUHorkaYjkkNHIH_P1hiOu3LZy4pbU2Ep1ehRIKp5LMJ6qGRlBmqUm2nsuxugkJO9p4cK1W9XNsEb10jUv4kL8T2BZqrOkU6L5yMMNPszGPCRaxDBCOjExKFHwPKS8_yalfYeMddnWS1Hjt9-2IlxkcNDZBu0"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-xl max-w-7xl mx-auto space-y-xl">
+<!-- Header Section -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Promotion Engine</h2>
+<p class="text-on-surface-variant mt-xs">Curate exclusive offers and manage retail partner incentives.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-lg py-md rounded-lg font-data-ui flex items-center gap-2 hover:bg-primary transition-colors shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+<span class="material-symbols-outlined">add</span>
+                    Create New Coupon
+                </button>
+</div>
+<!-- Bento Grid of Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="glass-card premium-border-top p-lg rounded-xl flex flex-col justify-between h-40 relative overflow-hidden">
+<div class="absolute right-0 bottom-0 opacity-10">
+<span class="material-symbols-outlined text-8xl">local_activity</span>
+</div>
+<div>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Active Coupons</span>
+<div class="text-h2 font-h2 text-primary mt-xs">12</div>
+</div>
+<div class="flex items-center gap-sm text-secondary">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="font-data-ui">+3 since last month</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col justify-between h-40">
+<div>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Total Redemptions</span>
+<div class="text-h2 font-h2 text-on-surface mt-xs">1,248</div>
+</div>
+<div class="flex items-center gap-sm text-secondary">
+<span class="organic-pip text-secondary bg-secondary"></span>
+<span class="font-data-ui">84% Success Rate</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col justify-between h-40">
+<div>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Revenue Generated</span>
+<div class="text-h2 font-h2 text-on-surface mt-xs">$42,500</div>
+</div>
+<div class="flex items-center gap-sm text-primary">
+<span class="organic-pip text-primary bg-primary"></span>
+<span class="font-data-ui">Avg. $84/Coupon</span>
+</div>
+</div>
+<div class="glass-card p-lg rounded-xl flex flex-col justify-between h-40 border-l-4 border-error">
+<div>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-widest">Expired / Inactive</span>
+<div class="text-h2 font-h2 text-on-surface mt-xs">48</div>
+</div>
+<button class="text-error font-data-ui hover:underline text-left">Clean up archive</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Main Coupon List -->
+<div class="lg:col-span-2 space-y-lg">
+<div class="flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-on-surface">Active Portfolio</h3>
+<div class="flex gap-sm">
+<button class="px-sm py-xs bg-surface-container-high rounded text-label-sm">Filter</button>
+<button class="px-sm py-xs bg-surface-container-high rounded text-label-sm">Export</button>
+</div>
+</div>
+<div class="space-y-md">
+<!-- Coupon Item 1 -->
+<div class="glass-card group flex items-center p-md rounded-xl hover:bg-surface-container-high transition-all">
+<div class="w-16 h-16 rounded-lg bg-secondary-container/20 flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-primary text-3xl">spa</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-data-ui text-on-surface">ORGANIC2024</span>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter border border-primary/20">Active</span>
+</div>
+<div class="text-label-sm text-on-surface-variant mt-1">25% Discount • Min Spend $150</div>
+</div>
+<div class="text-right mr-xl">
+<div class="font-data-ui text-on-surface">342 / 500</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Redemptions</div>
+</div>
+<div class="text-right min-w-[100px]">
+<div class="font-data-ui text-on-surface">Oct 12, 2024</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Expiry</div>
+</div>
+<button class="material-symbols-outlined ml-lg text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<!-- Coupon Item 2 -->
+<div class="glass-card group flex items-center p-md rounded-xl hover:bg-surface-container-high transition-all">
+<div class="w-16 h-16 rounded-lg bg-secondary-container/20 flex items-center justify-center mr-md">
+<span class="material-symbols-outlined text-primary text-3xl">eco</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-data-ui text-on-surface">RETAILGOLD</span>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter border border-primary/20">Active</span>
+</div>
+<div class="text-label-sm text-on-surface-variant mt-1">15% Tiered Discount • Exclusive</div>
+</div>
+<div class="text-right mr-xl">
+<div class="font-data-ui text-on-surface">12 / ∞</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Redemptions</div>
+</div>
+<div class="text-right min-w-[100px]">
+<div class="font-data-ui text-on-surface">Dec 31, 2024</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Expiry</div>
+</div>
+<button class="material-symbols-outlined ml-lg text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<!-- Coupon Item 3 (Expired) -->
+<div class="glass-card group flex items-center p-md rounded-xl opacity-60 hover:opacity-100 hover:bg-surface-container-high transition-all border-l-2 border-outline-variant">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low flex items-center justify-center mr-md grayscale">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">history</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-data-ui text-on-surface">SUMMER_VIBE</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-tighter">Expired</span>
+</div>
+<div class="text-label-sm text-on-surface-variant mt-1">Free Shipping • Site-wide</div>
+</div>
+<div class="text-right mr-xl">
+<div class="font-data-ui text-on-surface">1,000 / 1,000</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Redemptions</div>
+</div>
+<div class="text-right min-w-[100px]">
+<div class="font-data-ui text-on-surface">Aug 01, 2024</div>
+<div class="text-[10px] text-on-surface-variant uppercase">Expiry</div>
+</div>
+<button class="material-symbols-outlined ml-lg text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">restore_from_trash</button>
+</div>
+</div>
+<!-- Decorative Asset -->
+<div class="relative h-48 rounded-xl overflow-hidden mt-xl border border-primary/10">
+<img class="w-full h-full object-cover" data-alt="A wide cinematic shot of a luxury organic laboratory, featuring sleek glass apparatus and botanical elements. The scene is illuminated with a warm golden glow against deep charcoal shadows, creating a mood of scientific luxury. Soft amber highlights reflect off polished surfaces, reinforcing the 'Organic Opulence' brand identity." src="https://lh3.googleusercontent.com/aida/ADBb0ugss3Hib3XuE1yudQhZ3oP8lLYs5XIF--k7G5ly6Yj_JaQCyEtrz92WpPIL0VVLhbenMmYFtmZ-hO3VAvFxfpvf45tB7_OyJCixJIbhtMj28hvlyPs7mUw8Win0Cuatias3WWIfqFR7dMSmmxpGBVPJ0ft6SSWry0YPwcty9N2K_0ndAX40U9mK7-k365cWAxvOG4fORSLIZs2WRbFtfOE8L49_gjEX2jUEeOd_eO9doTx6_VH6pBNCusZNBol2vQ1F0G5O9SFqCg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent flex flex-col justify-end p-lg">
+<span class="text-primary font-label-sm uppercase tracking-widest">Promotion Insight</span>
+<h4 class="font-h3 text-h3 text-on-surface">Coupons driving 22% of wholesale growth.</h4>
+</div>
+</div>
+</div>
+<!-- Modern Form / Promotion Setup -->
+<div class="space-y-lg">
+<h3 class="font-h3 text-h3 text-on-surface">Promotion Logic</h3>
+<div class="glass-card premium-border-top p-lg rounded-xl space-y-md">
+<div class="space-y-sm">
+<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider">Promotion Type</label>
+<div class="grid grid-cols-2 gap-sm">
+<button class="bg-primary/10 border border-primary text-primary py-sm rounded-lg text-sm font-data-ui">Percentage</button>
+<button class="bg-surface-container-high border border-outline-variant/30 text-on-surface-variant py-sm rounded-lg text-sm font-data-ui">Fixed Amount</button>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider">Discount Value</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border-0 border-b border-primary/30 focus:border-primary focus:ring-0 text-primary font-h3 py-2 px-0 transition-all" type="text" value="25"/>
+<span class="absolute right-0 bottom-2 text-primary font-h3">%</span>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider">Coupon Code</label>
+<div class="flex gap-sm">
+<input class="flex-1 bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-sm text-on-surface text-sm focus:ring-1 focus:ring-primary/50" placeholder="e.g. LUXURY2024" type="text"/>
+<button class="material-symbols-outlined bg-surface-container-high p-sm rounded-lg text-on-surface-variant hover:text-primary transition-colors">refresh</button>
+</div>
+</div>
+<div class="space-y-sm pt-md">
+<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider">Usage Restrictions</label>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest/50 rounded-lg border border-outline-variant/10">
+<span class="text-sm text-on-surface-variant">Limit usage per user</span>
+<div class="w-10 h-5 bg-primary/20 rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest/50 rounded-lg border border-outline-variant/10">
+<span class="text-sm text-on-surface-variant">Min order quantity (3)</span>
+<div class="w-10 h-5 bg-surface-variant rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 w-4 h-4 bg-on-surface-variant rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-lg">
+<button class="w-full bg-primary-container text-on-primary-container py-md rounded-lg font-data-ui flex items-center justify-center gap-2 hover:bg-primary transition-all">
+<span class="material-symbols-outlined">auto_awesome</span>
+                                Deploy Promotion
+                            </button>
+</div>
+</div>
+<div class="glass-card p-lg rounded-xl flex items-center gap-lg">
+<img class="w-20 h-20 rounded-full object-cover border border-primary/20" data-alt="Close-up artistic photograph of golden botanical oil droplets suspended in clear water, captured with macro lenses. The lighting uses warm golden tones reflecting through liquid prisms, symbolizing premium organic purity and high-end ingredient quality. The background is a velvety charcoal green, consistent with the Organic Opulence design theme." src="https://lh3.googleusercontent.com/aida/ADBb0uiIRLRXwpsVVihTw7BlXzxb610myA0uNlL0-6b0f0D7N2Eqgq5OCg4zxWl4bdkA1ZYO1l3hPESufRoSkdZtp75xzG3k0YIXHy8-nBovrN0PBtBO6CkXdxmB_6nlKK_5ivzCrsV3tNsQfIt3kSJKaUkpZwZek3W2hbI0qTyFcj_8daYAy3U7FUdV_6DWEu9_k6wl0E6jJMcsAptYXmSOSQp6g-q50iGPe6oeNXR8CSYSH54bg8eWzoKzVw"/>
+<div>
+<h4 class="font-data-ui text-on-surface">Auto-Promotion</h4>
+<p class="text-label-sm text-on-surface-variant">AI-suggested discount for low-stock items.</p>
+<button class="text-primary text-[10px] uppercase font-bold tracking-widest mt-2">Enable Pilot</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB (Suppressed as per rules for Details/Settings/Management screens) -->
+</body></html>

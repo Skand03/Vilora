@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#1b1c19",
+                    "inverse-surface": "#303030",
+                    "primary-fixed-dim": "#a7cec8",
+                    "secondary": "#7c5800",
+                    "primary-fixed": "#c3eae4",
+                    "surface-tint": "#406560",
+                    "surface-container-highest": "#e4e2e1",
+                    "surface-container-high": "#eae7e7",
+                    "surface": "#fcf9f8",
+                    "surface-variant": "#e4e2e1",
+                    "primary-container": "#062f2b",
+                    "error": "#ba1a1a",
+                    "on-surface": "#1b1c1c",
+                    "secondary-fixed": "#ffdea7",
+                    "outline": "#717977",
+                    "background": "#fcf9f8",
+                    "surface-dim": "#dcd9d9",
+                    "surface-container-low": "#f6f3f2",
+                    "secondary-fixed-dim": "#f0bf65",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary-container": "#729892",
+                    "on-background": "#1b1c1c",
+                    "inverse-primary": "#a7cec8",
+                    "tertiary": "#151613",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#91918d",
+                    "on-primary-fixed": "#00201d",
+                    "on-primary-fixed-variant": "#284d48",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#f0eded",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#414847",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0f0",
+                    "secondary-container": "#ffcd71",
+                    "primary": "#001916",
+                    "on-secondary-container": "#785500",
+                    "on-tertiary-fixed-variant": "#474744",
+                    "outline-variant": "#c0c8c6",
+                    "on-secondary-fixed": "#271900",
+                    "tertiary-fixed-dim": "#c8c6c2",
+                    "tertiary-fixed": "#e4e2dd",
+                    "tertiary-container": "#292a27",
+                    "on-secondary-fixed-variant": "#5e4200",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "80px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "section-gap": "120px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-md": ["Manrope"],
+                    "headline-md": ["Noto Serif"],
+                    "display-lg": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "headline-lg": ["Noto Serif"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(124, 88, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-secondary-container/30">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-72 fixed left-0 top-0 hidden lg:flex flex-col bg-surface dark:bg-primary border-r border-outline-variant/20 shadow-sm z-50">
+<div class="px-6 py-unit-8 flex flex-col h-full">
+<a class="mb-10 block" href="/">
+<h1 class="font-headline-lg text-primary dark:text-primary-fixed mb-1">Vilora Naturals</h1>
+<p class="font-label-md text-on-surface-variant/60 tracking-widest uppercase">Premium Wellness</p>
+</a>
+<div class="mb-10 flex items-center gap-4 px-2">
+<img alt="Vilora Member" class="w-12 h-12 rounded-full object-cover ring-2 ring-secondary/20" data-alt="A sophisticated close-up portrait of a serene woman with natural skin and elegant features, representing a premium wellness brand customer. The lighting is soft and cinematic, with a warm, ethereal glow that highlights her clear complexion. The background is a blurred, ivory-toned botanical environment, maintaining an organic luxury aesthetic with deep green and gold undertones." src="https://lh3.googleusercontent.com/aida/ADBb0ugCp7gfkwyITHwGwgjMC8kzQhiWQaJXE7GQWGzAhYC8F8xGivftj2TU47AR6362aIDATaYQvceqPCR94SK2Efya9emrgcmUHorkaYjkkNHIH_P1hiOu3LZy4pbU2Ep1ehRIKp5LMJ6qGRlBmqUm2nsuxugkJO9p4cK1W9XNsEb10jUv4kL8T2BZqrOkU6L5yMMNPszGPCRaxDBCOjExKFHwPKS8_yalfYeMddnWS1Hjt9-2IlxkcNDZBu0"/>
+<div>
+<h3 class="font-label-md text-on-surface">Welcome back</h3>
+<p class="text-[12px] text-secondary font-bold uppercase tracking-wider">Gold Member</p>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<!-- Dashboard Active -->
+<a class="bg-secondary-container/30 text-on-secondary-container border-l-4 border-secondary px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">package_2</span>
+<span class="font-label-md text-label-md">Order History</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-md text-label-md">Wishlist</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label-md text-label-md">Saved Addresses</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">potted_plant</span>
+<span class="font-label-md text-label-md">Loyalty Points</span>
+</a>
+</nav>
+<div class="mt-auto pt-10 space-y-1">
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-label-md text-label-md mb-6 hover:bg-primary-container transition-colors">
+                    Book Wellness Consult
+                </button>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Profile Settings</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-6 py-4 flex items-center gap-4 transition-all hover:translate-x-1 duration-300" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Component -->
+<header class="lg:ml-72 bg-surface/80 backdrop-blur-xl dark:bg-primary/90 border-b border-outline-variant/30 docked full-width top-0 sticky z-40 shadow-[0_8px_32px_0_rgba(0,25,22,0.05)]">
+<div class="flex justify-between items-center w-full px-8 md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="lg:hidden font-display-lg text-primary text-[24px] tracking-tighter">Vilora</span>
+<div class="hidden md:flex gap-6">
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant/70 hover:text-primary transition-colors font-label-md text-label-md" href="#">Shop</a>
+<a class="text-on-surface-variant/70 hover:text-primary transition-colors font-label-md text-label-md" href="#">Wellness</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full w-64 focus:ring-1 focus:ring-secondary/30 text-label-md" placeholder="Search rituals..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-secondary/5 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-secondary">notifications</span>
+</button>
+<button class="p-2 hover:bg-secondary/5 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined text-secondary">shopping_bag</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Customer Profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a woman embodying organic luxury and high-end wellness. The lighting is soft and golden, illuminating her skin with a healthy, radiant glow. She is positioned against a subtle, ivory background with soft botanical shadows. The overall feel is serene, exclusive, and polished, fitting a premium brand like Vilora Naturals." src="https://lh3.googleusercontent.com/aida/ADBb0ugCp7gfkwyITHwGwgjMC8kzQhiWQaJXE7GQWGzAhYC8F8xGivftj2TU47AR6362aIDATaYQvceqPCR94SK2Efya9emrgcmUHorkaYjkkNHIH_P1hiOu3LZy4pbU2Ep1ehRIKp5LMJ6qGRlBmqUm2nsuxugkJO9p4cK1W9XNsEb10jUv4kL8T2BZqrOkU6L5yMMNPszGPCRaxDBCOjExKFHwPKS8_yalfYeMddnWS1Hjt9-2IlxkcNDZBu0"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="lg:ml-72 min-h-screen">
+<div class="max-w-container-max mx-auto px-8 md:px-margin-desktop py-12">
+<!-- Welcome Header -->
+<section class="mb-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="max-w-2xl">
+<h2 class="font-display-lg text-primary mb-4">Welcome back, Eleanor</h2>
+<p class="font-body-lg text-on-surface-variant leading-relaxed">Your journey to wellness continues. You've been consistent with your morning ritual for 12 days. Keep nourishing your soul.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-4 bg-primary text-on-primary rounded-full font-label-md hover:opacity-90 transition-all shadow-lg shadow-primary/10">Order Quick Re-fill</button>
+</div>
+</div>
+</section>
+<!-- Top Grid: Loyalty & Overview -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Loyalty Points Widget -->
+<div class="lg:col-span-5 glass-card rounded-2xl p-8 flex flex-col justify-between shadow-[0_40px_60px_-15px_rgba(0,25,22,0.08)]">
+<div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<span class="font-label-md text-secondary uppercase tracking-widest text-[12px]">Loyalty Balance</span>
+<h3 class="font-display-lg text-primary mt-2">2,450</h3>
+<p class="font-body-md text-on-surface-variant">Points Available</p>
+</div>
+<div class="p-3 bg-secondary-container/20 rounded-full">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between font-label-md text-on-surface-variant">
+<span>Silver Tier</span>
+<span class="text-secondary">550 pts to Gold</span>
+</div>
+<div class="h-1 w-full bg-outline-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[78%]"></div>
+</div>
+</div>
+</div>
+<button class="mt-8 text-secondary font-label-md flex items-center gap-2 hover:gap-3 transition-all">
+                        Redeem for Rituals <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<!-- Overview Section: Bento Grid Cards -->
+<div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Recent Purchases -->
+<div class="glass-card rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+<h4 class="font-headline-md text-[20px] text-primary mb-6">Recent Purchases</h4>
+<div class="space-y-4">
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-surface-container shadow-inner">
+<img alt="Product Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A luxury botanical skincare product bottle set against a minimalist ivory background. The bottle is sleek with gold accents and elegant serif typography. Natural morning sunlight casts soft, artistic shadows of leaves across the surface, creating an atmosphere of organic opulence and high-end serenity." src="https://lh3.googleusercontent.com/aida/ADBb0ugss3Hib3XuE1yudQhZ3oP8lLYs5XIF--k7G5ly6Yj_JaQCyEtrz92WpPIL0VVLhbenMmYFtmZ-hO3VAvFxfpvf45tB7_OyJCixJIbhtMj28hvlyPs7mUw8Win0Cuatias3WWIfqFR7dMSmmxpGBVPJ0ft6SSWry0YPwcty9N2K_0ndAX40U9mK7-k365cWAxvOG4fORSLIZs2WRbFtfOE8L49_gjEX2jUEeOd_eO9doTx6_VH6pBNCusZNBol2vQ1F0G5O9SFqCg"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Eternal Glow Serum</p>
+<p class="text-[12px] text-on-surface-variant/60">Delivered Sep 12</p>
+</div>
+</div>
+<div class="flex items-center gap-4 group cursor-pointer">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-surface-container shadow-inner">
+<img alt="Product Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A premium wellness candle with an ivory wax surface, housed in a deep forest green glass vessel with a gold foil label. The scene is set in a softly lit, high-end interior with minimalist decor. The lighting is cinematic, highlighting the tactile quality of the materials and the brand's sophisticated aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0uiIRLRXwpsVVihTw7BlXzxb610myA0uNlL0-6b0f0D7N2Eqgq5OCg4zxWl4bdkA1ZYO1l3hPESufRoSkdZtp75xzG3k0YIXHy8-nBovrN0PBtBO6CkXdxmB_6nlKK_5ivzCrsV3tNsQfIt3kSJKaUkpZwZek3W2hbI0qTyFcj_8daYAy3U7FUdV_6DWEu9_k6wl0E6jJMcsAptYXmSOSQp6g-q50iGPe6oeNXR8CSYSH54bg8eWzoKzVw"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Midnight Forest Ritual</p>
+<p class="text-[12px] text-on-surface-variant/60">Delivered Aug 28</p>
+</div>
+</div>
+</div>
+<button class="mt-6 text-on-surface-variant hover:text-secondary font-label-md text-[13px] transition-colors">View All Orders</button>
+</div>
+<!-- Active Notifications -->
+<div class="glass-card rounded-2xl p-6 bg-primary-container/5 border-l-4 border-secondary shadow-sm">
+<h4 class="font-headline-md text-[20px] text-primary mb-6">Updates</h4>
+<div class="space-y-5">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+<div>
+<p class="font-label-md text-on-surface">Order Shipped</p>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Your 'Vitality Elixir' is on its way and will arrive tomorrow.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary">event</span>
+<div>
+<p class="font-label-md text-on-surface">Wellness Consult</p>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Reminder: Your session with Dr. Aris is today at 4:00 PM.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Order History Table Section -->
+<section class="mb-section-gap">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-primary">Order History</h3>
+<button class="text-secondary font-label-md border-b border-secondary/20 hover:border-secondary transition-all">Download All Invoices</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-separate border-spacing-y-3">
+<thead>
+<tr class="text-on-surface-variant/60 font-label-md uppercase text-[12px] tracking-[0.2em]">
+<th class="px-6 py-4 font-semibold">Order ID</th>
+<th class="px-6 py-4 font-semibold">Date</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="glass-card hover:translate-y-[-2px] transition-all duration-300 shadow-sm">
+<td class="px-6 py-6 rounded-l-2xl font-label-md text-primary">#VL-90234</td>
+<td class="px-6 py-6 font-body-md text-on-surface-variant">Sep 12, 2024</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-[12px] font-bold uppercase tracking-wider">Delivered</span>
+</td>
+<td class="px-6 py-6 rounded-r-2xl text-right font-label-md text-primary">$184.00</td>
+</tr>
+<tr class="glass-card hover:translate-y-[-2px] transition-all duration-300 shadow-sm">
+<td class="px-6 py-6 rounded-l-2xl font-label-md text-primary">#VL-89412</td>
+<td class="px-6 py-6 font-body-md text-on-surface-variant">Aug 28, 2024</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-[12px] font-bold uppercase tracking-wider">Delivered</span>
+</td>
+<td class="px-6 py-6 rounded-r-2xl text-right font-label-md text-primary">$92.50</td>
+</tr>
+<tr class="glass-card hover:translate-y-[-2px] transition-all duration-300 shadow-sm opacity-80">
+<td class="px-6 py-6 rounded-l-2xl font-label-md text-primary">#VL-88102</td>
+<td class="px-6 py-6 font-body-md text-on-surface-variant">Jul 15, 2024</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-bold uppercase tracking-wider">Returned</span>
+</td>
+<td class="px-6 py-6 rounded-r-2xl text-right font-label-md text-primary">$210.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Wishlist Grid -->
+<section class="mb-section-gap">
+<div class="flex justify-between items-center mb-10">
+<h3 class="font-headline-md text-primary">Saved Essentials</h3>
+<div class="flex gap-4">
+<button class="w-10 h-10 border border-outline-variant/30 rounded-full flex items-center justify-center hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-secondary">chevron_left</span>
+</button>
+<button class="w-10 h-10 border border-outline-variant/30 rounded-full flex items-center justify-center hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-secondary">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Wishlist Item 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative">
+<img alt="Radiance Oil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A vertical, tall shot of a premium glass oil bottle with botanical infusions visible inside. The bottle sits on a minimalist stone pedestal in a sun-drenched spa room. The color palette is composed of ivory, pale gold, and deep forest green. Soft focus background shows a peaceful, high-end wellness retreat environment." src="https://lh3.googleusercontent.com/aida/ADBb0uhF1k-Wuv_q9K6mQJJXfvkJjnsV7WdtTnEk6781764Z3wdrj-UVXjZTWMiScGF3gO27Ng1XKS9DDX4bQNWvYa7Ay14YbkUog8jK8pKTbpZl0D5HhgO8p7ctHDhGcsDWv2wmzlQ9uXfOXcEcNbICCbyuvqiY28wwfmz8sTuI3ZaQ8_Y6WYYO96rBfXP2JUyNTEPx-tPuRki65_SCSL0pI4CsgKa4mkJFMGk_10B6EaV4TO48cwXjhwhjwCo"/>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 bg-surface/80 backdrop-blur rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+<h5 class="font-label-md text-primary text-[16px]">Radiance Infusion Oil</h5>
+<p class="font-body-md text-secondary mt-1">$74.00</p>
+<button class="mt-4 w-full border border-secondary text-secondary py-3 rounded-lg font-label-md hover:bg-secondary hover:text-on-secondary transition-all">Add to Ritual</button>
+</div>
+<!-- Wishlist Item 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative">
+<img alt="Herbal Tea" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A close-up of premium loose-leaf tea inside a designer glass jar with a dark wooden lid. The lighting creates a high-contrast, moody aesthetic with golden hour rays illuminating the textures of the dried botanicals. The surrounding setting is an elegant, minimalist kitchen with marble surfaces and ivory walls." src="https://lh3.googleusercontent.com/aida/ADBb0ugss3Hib3XuE1yudQhZ3oP8lLYs5XIF--k7G5ly6Yj_JaQCyEtrz92WpPIL0VVLhbenMmYFtmZ-hO3VAvFxfpvf45tB7_OyJCixJIbhtMj28hvlyPs7mUw8Win0Cuatias3WWIfqFR7dMSmmxpGBVPJ0ft6SSWry0YPwcty9N2K_0ndAX40U9mK7-k365cWAxvOG4fORSLIZs2WRbFtfOE8L49_gjEX2jUEeOd_eO9doTx6_VH6pBNCusZNBol2vQ1F0G5O9SFqCg"/>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 bg-surface/80 backdrop-blur rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+<h5 class="font-label-md text-primary text-[16px]">Lunar Rest Herbal Tea</h5>
+<p class="font-body-md text-secondary mt-1">$42.00</p>
+<button class="mt-4 w-full border border-secondary text-secondary py-3 rounded-lg font-label-md hover:bg-secondary hover:text-on-secondary transition-all">Add to Ritual</button>
+</div>
+<!-- Wishlist Item 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative">
+<img alt="Body Butter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A wide-angle product shot of a luxury body cream jar placed on a textured linen cloth. The room is filled with soft, diffused morning light, emphasizing a clean and serene light-mode aesthetic. A small sprig of fresh eucalyptus lies beside the jar, connecting the product to its organic origins. The branding is subtle, gold-foiled, and highly premium." src="https://lh3.googleusercontent.com/aida/ADBb0uiIRLRXwpsVVihTw7BlXzxb610myA0uNlL0-6b0f0D7N2Eqgq5OCg4zxWl4bdkA1ZYO1l3hPESufRoSkdZtp75xzG3k0YIXHy8-nBovrN0PBtBO6CkXdxmB_6nlKK_5ivzCrsV3tNsQfIt3kSJKaUkpZwZek3W2hbI0qTyFcj_8daYAy3U7FUdV_6DWEu9_k6wl0E6jJMcsAptYXmSOSQp6g-q50iGPe6oeNXR8CSYSH54bg8eWzoKzVw"/>
+<div class="absolute top-4 right-4">
+<button class="w-10 h-10 bg-surface/80 backdrop-blur rounded-full flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+<h5 class="font-label-md text-primary text-[16px]">Velvet Silk Body Butter</h5>
+<p class="font-body-md text-secondary mt-1">$68.00</p>
+<button class="mt-4 w-full border border-secondary text-secondary py-3 rounded-lg font-label-md hover:bg-secondary hover:text-on-secondary transition-all">Add to Ritual</button>
+</div>
+<!-- Wishlist Item 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 relative bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-5xl">auto_awesome</span>
+<div class="absolute inset-0 bg-primary/5"></div>
+</div>
+<h5 class="font-label-md text-primary text-[16px]">Custom Ritual Kit</h5>
+<p class="font-body-md text-secondary mt-1">$120.00</p>
+<button class="mt-4 w-full border border-secondary text-secondary py-3 rounded-lg font-label-md hover:bg-secondary hover:text-on-secondary transition-all">Add to Ritual</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Component -->
+<footer class="w-full py-section-gap bg-surface-container-lowest dark:bg-tertiary border-t border-outline-variant/10">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-4">
+<h2 class="font-headline-md text-primary dark:text-primary-fixed">Vilora Naturals</h2>
+<p class="font-body-md text-on-surface-variant/60">© 2024 Vilora Naturals. Defined by Nature.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-body-md text-on-surface-variant/60 hover:text-secondary transition-opacity" href="#">Privacy Policy</a>
+<a class="font-body-md text-on-surface-variant/60 hover:text-secondary transition-opacity" href="#">Terms of Service</a>
+<a class="font-body-md text-on-surface-variant/60 hover:text-secondary transition-opacity" href="#">Sustainability Report</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>
