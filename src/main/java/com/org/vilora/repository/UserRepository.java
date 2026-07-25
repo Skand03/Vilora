@@ -1,6 +1,6 @@
 package com.org.vilora.repository;
 
-import com.org.vilora.model.User;
+import com.org.vilora.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

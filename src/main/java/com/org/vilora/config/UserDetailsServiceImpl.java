@@ -1,6 +1,6 @@
 package com.org.vilora.config;
 
-import com.org.vilora.model.User;
+import com.org.vilora.entity.User;
 import com.org.vilora.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

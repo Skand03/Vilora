@@ -1,6 +1,6 @@
 package com.org.vilora.controller;
 
-import com.org.vilora.model.User;
+import com.org.vilora.entity.User;
 import com.org.vilora.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

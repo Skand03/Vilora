@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500;600&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#d4af37",
+                        "on-secondary-container": "#96bdb7",
+                        "on-primary-container": "#554300",
+                        "on-tertiary": "#313030",
+                        "tertiary-container": "#b4b2b2",
+                        "on-surface-variant": "#d0c5af",
+                        "primary": "#f2ca50",
+                        "on-secondary-fixed-variant": "#284d48",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#99907c",
+                        "on-primary-fixed": "#241a00",
+                        "error-container": "#93000a",
+                        "on-secondary": "#0f3632",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-fixed": "#00201d",
+                        "surface-tint": "#e9c349",
+                        "surface-container-low": "#1f1b13",
+                        "tertiary": "#d0cdcd",
+                        "surface-variant": "#38342b",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#eae1d4",
+                        "inverse-surface": "#eae1d4",
+                        "on-background": "#eae1d4",
+                        "secondary-fixed": "#c3eae4",
+                        "inverse-primary": "#735c00",
+                        "surface-dim": "#16130b",
+                        "surface": "#16130b",
+                        "surface-container-lowest": "#110e07",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "secondary-container": "#284d48",
+                        "background": "#16130b",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-container": "#231f17",
+                        "secondary": "#a7cec8",
+                        "surface-container-highest": "#38342b",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#a7cec8",
+                        "outline-variant": "#4d4635",
+                        "on-tertiary-container": "#454544",
+                        "primary-fixed": "#ffe088",
+                        "surface-container-high": "#2d2a21",
+                        "on-primary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#343027",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#3d392f",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "48px",
+                        "container-padding": "32px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "unit": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Noto Serif"],
+                        "h1": ["Noto Serif"],
+                        "h3": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "data-ui": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "data-ui": ["15px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["13px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .organic-pip-success {
+            box-shadow: 0 0 8px #a7cec8;
+        }
+        .organic-pip-warning {
+            box-shadow: 0 0 8px #f2ca50;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 flex flex-col border-r border-outline-variant/20 bg-surface z-50">
+<div class="p-lg flex flex-col gap-xs">
+<h3 class="font-h3 text-h3 font-medium text-primary">Vilora Naturals</h3>
+<p class="font-body-md text-label-sm text-on-surface-variant opacity-70">Luxury Organics Admin</p>
+</div>
+<nav class="flex-1 px-sm mt-md space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+                Orders
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                Products
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">group</span>
+                Users
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">reorder</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-gradient-to-r from-secondary-container/30 to-transparent border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rate_review</span>
+                Reviews
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-high/50" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+                Coupons
+            </a>
+</nav>
+<div class="p-md border-t border-outline-variant/10 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 w-full flex justify-between items-center px-lg py-sm h-16 bg-surface shadow-md border-b border-outline-variant/30 border-b border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-lg">
+<h2 class="font-h2 text-h2 text-primary">Reviews</h2>
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="bg-surface-container-low border-none focus:ring-1 focus:ring-primary/50 rounded-lg pl-10 pr-4 py-2 text-label-sm w-80 text-on-surface placeholder-on-surface-variant/50" placeholder="Search customer or product..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary rounded-full border border-surface"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant/20 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a corporate administrator in a high-end luxury office setting. The lighting is sophisticated, with soft warm tones highlighting the professional attire against a blurred, deep emerald and charcoal background. The mood is authoritative and calm, reflecting the premium identity of Vilora Naturals." src="https://lh3.googleusercontent.com/aida/ADBb0ugCp7gfkwyITHwGwgjMC8kzQhiWQaJXE7GQWGzAhYC8F8xGivftj2TU47AR6362aIDATaYQvceqPCR94SK2Efya9emrgcmUHorkaYjkkNHIH_P1hiOu3LZy4pbU2Ep1ehRIKp5LMJ6qGRlBmqUm2nsuxugkJO9p4cK1W9XNsEb10jUv4kL8T2BZqrOkU6L5yMMNPszGPCRaxDBCOjExKFHwPKS8_yalfYeMddnWS1Hjt9-2IlxkcNDZBu0"/>
+</div>
+</div>
+</header>
+<!-- Canvas Body -->
+<div class="flex-1 overflow-y-auto p-lg bg-surface-container-lowest">
+<div class="grid grid-cols-12 gap-lg max-w-7xl mx-auto">
+<!-- Feedback Loop Feed -->
+<div class="col-span-12 lg:col-span-8 space-y-md">
+<!-- Filters Row -->
+<div class="flex items-center justify-between mb-md">
+<div class="flex gap-sm">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-data-ui text-label-sm">Pending (12)</button>
+<button class="px-4 py-1.5 rounded-full glass-card text-on-surface-variant hover:text-primary transition-colors font-data-ui text-label-sm">Approved</button>
+<button class="px-4 py-1.5 rounded-full glass-card text-on-surface-variant hover:text-primary transition-colors font-data-ui text-label-sm">Flagged</button>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Sort by: Newest
+                        </div>
+</div>
+<!-- Review Card 1 -->
+<div class="glass-card rounded-xl p-lg relative group transition-all hover:bg-surface-container/40">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">person</span>
+</div>
+<div>
+<h4 class="font-data-ui text-on-surface">Eleanor Vance</h4>
+<p class="text-label-sm text-on-surface-variant">Verified Buyer • 2 hours ago</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="mt-1 px-2 py-0.5 rounded bg-secondary-container/30 text-secondary text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary organic-pip-success"></span>
+                                    Positive Sentiment
+                                </div>
+</div>
+</div>
+<div class="mb-md">
+<span class="text-label-sm font-bold text-primary tracking-wider uppercase mb-1 block">Royal Botanical Elixir</span>
+<p class="text-body-md text-on-surface leading-relaxed">
+                                The texture is absolutely divine. I've used several high-end organic serums, but Vilora's elixir has a depth of hydration that feels truly premium. The scent is subtle and grounding.
+                            </p>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-md mt-md">
+<div class="flex gap-sm">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-data-ui text-label-sm rounded hover:bg-primary-fixed duration-150 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                    Approve
+                                </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant/30 text-on-surface-variant font-data-ui text-label-sm rounded hover:border-primary/50 hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">reply</span>
+                                    Reply
+                                </button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-error font-data-ui text-label-sm rounded hover:bg-error/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                                Reject
+                            </button>
+</div>
+</div>
+<!-- Review Card 2 -->
+<div class="glass-card rounded-xl p-lg relative group transition-all hover:bg-surface-container/40">
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">person</span>
+</div>
+<div>
+<h4 class="font-data-ui text-on-surface">Julian Thorne</h4>
+<p class="text-label-sm text-on-surface-variant">Verified Buyer • 5 hours ago</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="mt-1 px-2 py-0.5 rounded bg-surface-container-high/50 text-on-surface-variant text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container organic-pip-warning"></span>
+                                    Neutral Sentiment
+                                </div>
+</div>
+</div>
+<div class="mb-md">
+<span class="text-label-sm font-bold text-primary tracking-wider uppercase mb-1 block">Ancient Forest Night Cream</span>
+<p class="text-body-md text-on-surface leading-relaxed">
+                                Packaging is beautiful and the cream feels high quality. However, for the price point, I expected the results to be more immediate. It's a nice product but might take longer to see the 'opulence' promised.
+                            </p>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-md mt-md">
+<div class="flex gap-sm">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-data-ui text-label-sm rounded hover:bg-primary-fixed duration-150 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                    Approve
+                                </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant/30 text-on-surface-variant font-data-ui text-label-sm rounded hover:border-primary/50 hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">reply</span>
+                                    Reply
+                                </button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-error font-data-ui text-label-sm rounded hover:bg-error/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                                Reject
+                            </button>
+</div>
+</div>
+<!-- Review Card 3 -->
+<div class="glass-card rounded-xl p-lg relative group transition-all hover:bg-surface-container/40">
+<div class="flex justify-between items-start mb-md">
+<div class="flex gap-md">
+<div class="w-12 h-12 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">person</span>
+</div>
+<div>
+<h4 class="font-data-ui text-on-surface">Sophia L.</h4>
+<p class="text-label-sm text-on-surface-variant">Verified Buyer • 1 day ago</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="mt-1 px-2 py-0.5 rounded bg-secondary-container/30 text-secondary text-xs font-bold uppercase tracking-widest flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary organic-pip-success"></span>
+                                    Positive Sentiment
+                                </div>
+</div>
+</div>
+<div class="mb-md">
+<span class="text-label-sm font-bold text-primary tracking-wider uppercase mb-1 block">Wildflower Mist Toner</span>
+<p class="text-body-md text-on-surface leading-relaxed">
+                                A sensory experience in every spray. It's the perfect mid-day refresher. The natural aroma is so clean and luxury-feeling.
+                            </p>
+<div class="mt-md flex gap-sm">
+<img class="w-32 h-20 object-cover rounded-lg border border-outline-variant/10" data-alt="A macro shot of luxurious skincare packaging from Vilora Naturals, showcasing a gold-embossed glass bottle against a dark, textured organic background. Soft light catches the reflections on the glass, emphasizing the premium quality and organic opulent aesthetic of the brand's botanical products." src="https://lh3.googleusercontent.com/aida/ADBb0ugss3Hib3XuE1yudQhZ3oP8lLYs5XIF--k7G5ly6Yj_JaQCyEtrz92WpPIL0VVLhbenMmYFtmZ-hO3VAvFxfpvf45tB7_OyJCixJIbhtMj28hvlyPs7mUw8Win0Cuatias3WWIfqFR7dMSmmxpGBVPJ0ft6SSWry0YPwcty9N2K_0ndAX40U9mK7-k365cWAxvOG4fORSLIZs2WRbFtfOE8L49_gjEX2jUEeOd_eO9doTx6_VH6pBNCusZNBol2vQ1F0G5O9SFqCg"/>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-md mt-md">
+<div class="flex gap-sm">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-data-ui text-label-sm rounded hover:bg-primary-fixed duration-150 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                    Approve
+                                </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant/30 text-on-surface-variant font-data-ui text-label-sm rounded hover:border-primary/50 hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">reply</span>
+                                    Reply
+                                </button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 text-error font-data-ui text-label-sm rounded hover:bg-error/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                                Reject
+                            </button>
+</div>
+</div>
+</div>
+<!-- Summary Sidebar -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<!-- Stats Card -->
+<div class="glass-card rounded-xl p-lg relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<h4 class="font-data-ui text-label-sm text-primary uppercase tracking-widest mb-lg">Reviews Overview</h4>
+<div class="flex items-end gap-md mb-xl">
+<span class="text-h1 font-h1 text-on-surface">4.8</span>
+<div class="flex flex-col mb-1">
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="text-label-sm text-on-surface-variant">Avg Rating</span>
+</div>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant">Pending Reviews</span>
+<span class="text-body-md font-bold text-primary">12</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant">Flagged Items</span>
+<span class="text-body-md font-bold text-error">3</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant">Weekly Volume</span>
+<span class="text-body-md font-bold text-secondary">+154</span>
+</div>
+</div>
+<div class="mt-xl h-24 w-full relative">
+<img class="w-full h-full object-cover rounded-lg opacity-40" data-alt="A sophisticated data visualization chart representing review trends for a luxury brand. The chart uses high-contrast emerald green lines with a soft glow effect against a deep charcoal background. Minimalist grid lines and gold highlights on key data peaks create an elegant, functional analytical display consistent with an organic opulent theme." src="https://lh3.googleusercontent.com/aida/ADBb0uiIRLRXwpsVVihTw7BlXzxb610myA0uNlL0-6b0f0D7N2Eqgq5OCg4zxWl4bdkA1ZYO1l3hPESufRoSkdZtp75xzG3k0YIXHy8-nBovrN0PBtBO6CkXdxmB_6nlKK_5ivzCrsV3tNsQfIt3kSJKaUkpZwZek3W2hbI0qTyFcj_8daYAy3U7FUdV_6DWEu9_k6wl0E6jJMcsAptYXmSOSQp6g-q50iGPe6oeNXR8CSYSH54bg8eWzoKzVw"/>
+</div>
+</div>
+<!-- Sentiment Distribution -->
+<div class="glass-card rounded-xl p-lg">
+<h4 class="font-data-ui text-label-sm text-on-surface uppercase tracking-widest mb-lg">Sentiment Profile</h4>
+<div class="space-y-md">
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span class="text-on-surface">Positive</span>
+<span class="text-on-surface-variant">88%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary organic-pip-success" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span class="text-on-surface">Neutral</span>
+<span class="text-on-surface-variant">10%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container" style="width: 10%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span class="text-on-surface">Critical</span>
+<span class="text-on-surface-variant">2%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-error" style="width: 2%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Product Card -->
+<div class="rounded-xl overflow-hidden glass-card relative h-64 group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="An atmospheric vertical image of a premium organic botanical garden at twilight. Deep forest greens and soft moonlight create a serene, exclusive mood. The visual is captured with a shallow depth of field, emphasizing the tactile, lush nature of high-end organic ingredients used in Vilora Naturals skincare." src="https://lh3.googleusercontent.com/aida/ADBb0uhF1k-Wuv_q9K6mQJJXfvkJjnsV7WdtTnEk6781764Z3wdrj-UVXjZTWMiScGF3gO27Ng1XKS9DDX4bQNWvYa7Ay14YbkUog8jK8pKTbpZl0D5HhgO8p7ctHDhGcsDWv2wmzlQ9uXfOXcEcNbICCbyuvqiY28wwfmz8sTuI3ZaQ8_Y6WYYO96rBfXP2JUyNTEPx-tPuRki65_SCSL0pI4CsgKa4mkJFMGk_10B6EaV4TO48cwXjhwhjwCo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-lg">
+<span class="text-xs font-bold text-primary tracking-tighter uppercase mb-1 block">Best Selling Product</span>
+<h5 class="font-h3 text-on-surface">Velvet Moss Cleanser</h5>
+<div class="flex gap-1 text-primary mt-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm text-on-surface font-bold">4.9</span>
+<span class="text-xs text-on-surface-variant ml-1">(428 reviews)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-lg right-lg w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition-transform group z-50">
+<span class="material-symbols-outlined text-[28px] font-bold">add</span>
+<div class="absolute right-16 px-4 py-2 bg-surface text-on-surface text-label-sm rounded-lg border border-outline-variant/20 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+            Request Manual Review
+        </div>
+</button>
+</body></html>

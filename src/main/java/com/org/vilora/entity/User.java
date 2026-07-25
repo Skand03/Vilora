@@ -1,4 +1,4 @@
-package com.org.vilora.model;
+package com.org.vilora.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&amp;family=Noto+Serif:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#f0bf65",
+                    "on-tertiary-fixed-variant": "#474744",
+                    "on-primary-fixed-variant": "#284d48",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#406560",
+                    "surface-container": "#f0eded",
+                    "outline": "#717977",
+                    "surface-container-highest": "#e4e2e1",
+                    "primary-container": "#062f2b",
+                    "secondary-container": "#ffcd71",
+                    "surface-bright": "#fcf9f8",
+                    "on-secondary-fixed-variant": "#5e4200",
+                    "on-surface-variant": "#414847",
+                    "on-primary-fixed": "#00201d",
+                    "tertiary-fixed-dim": "#c8c6c2",
+                    "primary-fixed": "#c3eae4",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#292a27",
+                    "background": "#fcf9f8",
+                    "tertiary": "#151613",
+                    "primary": "#001916",
+                    "surface-dim": "#dcd9d9",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#eae7e7",
+                    "on-background": "#1b1c1c",
+                    "tertiary-fixed": "#e4e2dd",
+                    "on-secondary-fixed": "#271900",
+                    "primary-fixed-dim": "#a7cec8",
+                    "surface-variant": "#e4e2e1",
+                    "inverse-surface": "#303030",
+                    "surface": "#fcf9f8",
+                    "on-surface": "#1b1c1c",
+                    "secondary": "#7c5800",
+                    "secondary-fixed": "#ffdea7",
+                    "on-tertiary-container": "#91918d",
+                    "outline-variant": "#c0c8c6",
+                    "on-secondary-container": "#785500",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#729892",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#a7cec8",
+                    "surface-container-low": "#f6f3f2",
+                    "inverse-on-surface": "#f3f0f0",
+                    "on-tertiary-fixed": "#1b1c19"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "margin-desktop": "80px",
+                    "section-gap": "120px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-md": ["Manrope"],
+                    "display-lg": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Noto Serif"],
+                    "body-md": ["Manrope"],
+                    "headline-md": ["Noto Serif"]
+            },
+            "fontSize": {
+                    "label-md": ["16px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(252, 249, 248, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c0c8c6;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed antialiased min-h-screen">
+<!-- Top Navigation (Contextual Suppression of Full Nav) -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-[0_4px_40px_rgba(0,25,22,0.05)]">
+<div class="flex justify-between items-center w-full px-gutter h-20 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="scale-95 active:scale-90 transition-transform text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">Vilora Naturals</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary/60 font-label-md text-label-md">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1;">lock</span>
+                    SECURE CHECKOUT
+                </div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-primary scale-95 active:scale-90 transition-transform">shopping_bag</span>
+<span class="material-symbols-outlined text-primary scale-95 active:scale-90 transition-transform">person</span>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-gutter py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Checkout Details -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Delivery Timeline -->
+<section class="glass-panel p-unit rounded-xl shadow-[0_8px_30px_rgb(0,25,22,0.04)]">
+<div class="flex justify-between items-center relative px-8 py-4">
+<div class="absolute top-1/2 left-8 right-8 h-[1px] bg-outline-variant/30 -translate-y-1/2 z-0"></div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-md text-label-md text-primary">Cart</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+</div>
+<span class="font-label-md text-label-md text-secondary">Delivery</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-outline-variant/30 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant/60">Payment</span>
+</div>
+</div>
+</section>
+<!-- Shipping Address -->
+<section class="space-y-8">
+<h2 class="font-headline-md text-headline-md text-primary border-b border-outline-variant/20 pb-4">Shipping Information</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<div class="space-y-2">
+<label class="font-headline-md text-[16px] text-primary block">Full Name</label>
+<input class="w-full bg-transparent border-b border-outline focus:border-secondary transition-colors py-2 outline-none font-body-md placeholder:text-outline-variant" placeholder="Eleanor Vance" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-headline-md text-[16px] text-primary block">Phone Number</label>
+<input class="w-full bg-transparent border-b border-outline focus:border-secondary transition-colors py-2 outline-none font-body-md placeholder:text-outline-variant" placeholder="+91 98765 43210" type="tel"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-headline-md text-[16px] text-primary block">Street Address</label>
+<input class="w-full bg-transparent border-b border-outline focus:border-secondary transition-colors py-2 outline-none font-body-md placeholder:text-outline-variant" placeholder="12 Oakwood Estate, Residency Road" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-headline-md text-[16px] text-primary block">City</label>
+<input class="w-full bg-transparent border-b border-outline focus:border-secondary transition-colors py-2 outline-none font-body-md placeholder:text-outline-variant" placeholder="Bangalore" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-headline-md text-[16px] text-primary block">Postal Code</label>
+<input class="w-full bg-transparent border-b border-outline focus:border-secondary transition-colors py-2 outline-none font-body-md placeholder:text-outline-variant" placeholder="560001" type="text"/>
+</div>
+</div>
+</section>
+<!-- Payment Methods -->
+<section class="space-y-8">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-primary">Payment Method</h2>
+<span class="font-label-md text-label-md text-secondary-fixed-dim bg-primary px-3 py-1 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+                        Encrypted
+                    </span>
+</div>
+<div class="space-y-4">
+<!-- UPI Selection -->
+<div class="glass-panel border-secondary p-6 rounded-xl shadow-[0_12px_40px_rgba(0,25,22,0.06)] relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-fixed-dim/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+<div class="flex items-start gap-4">
+<input checked="" class="mt-1 w-5 h-5 text-secondary border-outline focus:ring-secondary" id="upi" name="payment" type="radio"/>
+<label class="flex-1 cursor-pointer" for="upi">
+<div class="flex justify-between items-center mb-4">
+<span class="font-headline-md text-[18px] text-primary">UPI Transfer</span>
+<div class="flex gap-2">
+<div class="h-6 w-10 bg-surface-container rounded flex items-center justify-center text-xs font-bold text-on-surface-variant">GPay</div>
+<div class="h-6 w-10 bg-surface-container rounded flex items-center justify-center text-xs font-bold text-on-surface-variant">PhonePe</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="relative">
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg px-4 py-3 outline-none focus:border-secondary text-body-md" placeholder="viloranaturals@upi" type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary font-label-md text-[12px] uppercase">Verify</button>
+</div>
+<p class="text-[12px] text-on-surface-variant/70 italic">Pay instantly using any UPI enabled app.</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Razorpay/Cards Selection -->
+<div class="glass-panel p-6 rounded-xl border border-outline-variant/30 hover:border-outline transition-all cursor-pointer">
+<div class="flex items-start gap-4">
+<input class="mt-1 w-5 h-5 text-secondary border-outline focus:ring-secondary" id="razorpay" name="payment" type="radio"/>
+<label class="flex-1 cursor-pointer" for="razorpay">
+<div class="flex justify-between items-center">
+<span class="font-headline-md text-[18px] text-primary">Cards &amp; Netbanking</span>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline-variant">credit_card</span>
+<span class="material-symbols-outlined text-outline-variant">account_balance</span>
+</div>
+</div>
+<p class="text-[14px] text-on-surface-variant mt-1">Visa, Mastercard, RuPay, and all major banks.</p>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sticky Order Summary -->
+<aside class="lg:col-span-5">
+<div class="sticky top-32 glass-panel p-8 rounded-xl shadow-[0_20px_60px_rgba(0,25,22,0.08)] border border-white">
+<h3 class="font-headline-md text-[24px] text-primary mb-8">Order Summary</h3>
+<!-- Item List -->
+<div class="space-y-6 mb-8 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+<div class="flex gap-4">
+<div class="w-20 h-24 bg-surface-container rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A high-end, minimalist bottle of Forest Nectar Serum placed on a translucent glass surface. The lighting is ethereal and soft, highlighting the golden liquid inside. The background is a blurred deep forest green, creating a moody, organic luxury aesthetic consistent with Vilora Naturals branding." src="https://lh3.googleusercontent.com/aida/ADBb0ugCp7gfkwyITHwGwgjMC8kzQhiWQaJXE7GQWGzAhYC8F8xGivftj2TU47AR6362aIDATaYQvceqPCR94SK2Efya9emrgcmUHorkaYjkkNHIH_P1hiOu3LZy4pbU2Ep1ehRIKp5LMJ6qGRlBmqUm2nsuxugkJO9p4cK1W9XNsEb10jUv4kL8T2BZqrOkU6L5yMMNPszGPCRaxDBCOjExKFHwPKS8_yalfYeMddnWS1Hjt9-2IlxkcNDZBu0"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<h4 class="font-headline-md text-[16px] text-primary">Forest Nectar Serum</h4>
+<p class="text-label-md text-on-surface-variant/70">30ml • Qty: 1</p>
+</div>
+<span class="font-body-md text-primary">₹3,450.00</span>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-20 h-24 bg-surface-container rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A premium glass jar of Velvet Moss Cleanser showcased in a cinematic, low-light setting. The jar sits atop a smooth mossy rock, surrounded by subtle mist. The overall color palette features rich emerald greens and warm ivory highlights, emphasizing the organic and luxury status of the product." src="https://lh3.googleusercontent.com/aida/ADBb0ugss3Hib3XuE1yudQhZ3oP8lLYs5XIF--k7G5ly6Yj_JaQCyEtrz92WpPIL0VVLhbenMmYFtmZ-hO3VAvFxfpvf45tB7_OyJCixJIbhtMj28hvlyPs7mUw8Win0Cuatias3WWIfqFR7dMSmmxpGBVPJ0ft6SSWry0YPwcty9N2K_0ndAX40U9mK7-k365cWAxvOG4fORSLIZs2WRbFtfOE8L49_gjEX2jUEeOd_eO9doTx6_VH6pBNCusZNBol2vQ1F0G5O9SFqCg"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<h4 class="font-headline-md text-[16px] text-primary">Velvet Moss Cleanser</h4>
+<p class="text-label-md text-on-surface-variant/70">100ml • Qty: 1</p>
+</div>
+<span class="font-body-md text-primary">₹2,800.00</span>
+</div>
+</div>
+</div>
+<!-- Calculations -->
+<div class="space-y-4 border-t border-outline-variant/30 pt-6 mb-8">
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>₹6,250.00</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Shipping (Premium Express)</span>
+<span class="text-secondary">Free</span>
+</div>
+<div class="flex justify-between font-body-md text-on-surface-variant">
+<span>Estimated GST</span>
+<span>₹1,125.00</span>
+</div>
+<div class="flex justify-between font-headline-md text-[20px] text-primary pt-2 border-t border-outline-variant/10">
+<span>Total</span>
+<span>₹7,375.00</span>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full bg-primary text-on-primary py-5 rounded-lg font-label-md text-label-md tracking-widest flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(0,25,22,0.2)] hover:bg-primary-container active:scale-[0.98] transition-all group">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">lock</span>
+                    COMPLETE PURCHASE
+                </button>
+<!-- Trust Indicators -->
+<div class="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-outline-variant/20">
+<div class="flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[24px]">verified</span>
+<span class="text-xs font-label-md text-primary/60 leading-tight">ORGANIC CERTIFIED</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[24px]">gpp_good</span>
+<span class="text-xs font-label-md text-primary/60 leading-tight">SSL ENCRYPTED</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[24px]">eco</span>
+<span class="text-xs font-label-md text-primary/60 leading-tight">SUSTAINABLE PACKAGING</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Success Indicator Banner (Floating subtle) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-surface p-4 rounded-full shadow-2xl border border-secondary-fixed-dim flex items-center gap-3 px-6 z-40 hidden md:flex">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-pulse"></div>
+<p class="text-[12px] font-label-md text-primary tracking-wide">3 users are checking out right now. Secure your items.</p>
+</div>
+<!-- Footer -->
+<footer class="bg-surface dark:bg-primary border-t border-outline-variant/20 full-width py-section-gap mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop gap-8 max-w-container-max mx-auto">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="font-headline-md text-headline-md text-primary dark:text-secondary-fixed">Vilora Naturals</span>
+<p class="font-label-md text-label-md text-on-surface-variant/80 dark:text-on-tertiary-fixed-variant">© 2024 Vilora Naturals. Crafted for the Discerning.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant/80 dark:text-on-tertiary-fixed-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-md text-label-md text-on-surface-variant/80 dark:text-on-tertiary-fixed-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="font-label-md text-label-md text-on-surface-variant/80 dark:text-on-tertiary-fixed-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Sustainability</a>
+</div>
+</div>
+</footer>
+<!-- Bottom Nav (Suppressed on large, visible on mobile as requested for specific contexts) -->
+<div class="md:hidden">
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-4 px-2 bg-surface/90 backdrop-blur-xl border-t border-outline-variant/10 shadow-[0_-10px_40px_rgba(0,25,22,0.08)]">
+<div class="flex flex-col items-center text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-xs">Home</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">eco</span>
+<span class="font-label-md text-xs">Collections</span>
+</div>
+<div class="flex flex-col items-center text-secondary scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_mall</span>
+<span class="font-label-md text-xs">Bag</span>
+</div>
+<div class="flex flex-col items-center text-on-surface-variant transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-xs">Profile</span>
+</div>
+</nav>
+</div>
+</body></html>
