@@ -1,0 +1,101 @@
+# Vilora Naturals V1 - Progress Tracker
+
+## Project Overview
+- **Client**: Vilora Organic Essentials PVT LTD
+- **Platform**: Full-stack e-commerce website for premium dry fruits and organic products
+- **Backend**: Java 21, Spring Boot 3.5.5, Spring Security, Spring Data JPA, Jakarta Validation
+- **Database**: Supabase PostgreSQL (with configurable environment variables & fallback for local testing)
+- **Frontend**: React (Vite, TailwindCSS, Zustand, Axios, React Router)
+
+---
+
+## Phase Status Summary
+
+- [x] **Phase 0: Foundation** (Completed)
+  - Verified Maven dependencies, Java 21, Spring Boot 3.5.5, and build configuration
+  - Environment-based configuration established via `application.properties` with safe fallbacks
+  - Created `.env.example` with Supabase PostgreSQL connection placeholders and JWT configuration
+  - Added secret and env file exclusions to `.gitignore`
+  - Enhanced `GlobalExceptionHandler` with 401, 403, 404, 409, 400, and 500 status code handling
+  - Baseline Spring Boot context and persistence startup tests verified passing
+- [x] **Phase 1: Catalog** (Completed)
+  - Category CRUD, validation, duplicate rejection, and safe deactivation on deletion when products exist
+  - Product CRUD with category association, price rules (selling <= original), gallery images, ingredients, and nutrition
+  - Product multi-field search across name, description, and category name
+  - Filters by category, price range, stock availability, rating, and organic status (`organic` and `isOrganic`)
+  - Sorting (price-asc, price-desc, newest, top-rated, relevance) and server-side pagination with `PageResponse`
+  - Image gallery addition and removal endpoints (`/api/products/{id}/images`)
+  - File upload service supporting Supabase Storage with local filesystem fallback (`/api/products/upload-image`)
+  - Verified with 6 integration tests in `CatalogIntegrationTest` (100% pass)
+- [x] **Phase 2: Authentication and Authorization** (Completed)
+  - Customer registration with BCrypt password hashing & duplicate email prevention
+  - Customer login with secure JWT token issuance
+  - JWT authentication filter & Stateless Spring Security integration
+  - `/api/auth/me` and `/api/auth/profile` returning safe `UserResponse` without credential exposure
+  - Role-based access control protecting administrative catalog endpoints (`POST/PUT/DELETE /api/products`, `/api/categories` requiring `ROLE_ADMIN`)
+  - Automated integration tests in `AuthAndProfileIntegrationTest` verified passing (100%)
+- [x] **Phase 3: User Profile** (Completed)
+  - `/api/users/me` and `/api/auth/profile` retrieving authenticated user details
+  - Updating allowed profile fields (`fullName`, `address`, `phone`)
+  - Prevention of unauthorized access and credential leakage
+  - Automated integration tests verified passing
+- [x] **Phase 4: Shopping Cart and Wishlist** (Completed)
+  - Persistent authenticated cart: add, update quantity, remove, and clear cart
+  - Consolidated duplicate items on repeat adds
+  - Server-side price calculation and stock validation
+  - Persistent authenticated wishlist: idempotent add, remove, and user-scoped listing
+  - Verified with automated tests in `CartWishlistAddressIntegrationTest`
+- [x] **Phase 5: Address Management** (Completed)
+  - Full address CRUD with user ownership validation
+  - Default address management, auto-default for first address, and re-assignment on deletion
+  - Full compatibility with frontend address schema (`addressLine1`/`addressLine2`, `pincode`, `phoneNumber`, `name`)
+  - Verified with automated tests in `CartWishlistAddressIntegrationTest`
+- [x] **Phase 6: Order Management** (Completed)
+  - Transactional order creation from user cart with address ownership validation
+  - Server-side financial calculations: subtotal, free shipping over ₹499 (otherwise ₹49), 5% GST tax, totalAmount
+  - Persisted price, product name, and image snapshots in `OrderItem`
+  - Automated cart clearing upon order placement
+  - Order history and details retrieval scoped to authenticated user
+  - Cancellation enforcement: allowed on PENDING orders, rejected on SHIPPED/DELIVERED/CANCELLED orders
+  - Administrative endpoints to view all orders and update order/payment statuses
+  - Verified with automated tests in `OrderAndReviewIntegrationTest`
+- [x] **Phase 7: Payment-Ready (No Gateway)** (Completed)
+  - Explicit pending payment state (`paymentStatus = "PENDING"`)
+  - No gateway SDKs, no fabricated payment success verification
+  - Clean boundary for future gateway integration, supporting non-gateway COD in V1
+  - Verified with automated tests in `OrderAndReviewIntegrationTest`
+- [x] **Phase 8: Product Reviews** (Completed)
+  - Full Review entity, repository, service, and controller (`/api/products/{productId}/reviews`, `/api/reviews/{id}`)
+  - Rating (1-5) and comment validation with unique constraint per user & product
+  - Automatic recalculation of product average rating (scale 2) and reviewCount on add, update, and delete
+  - Strict ownership enforcement for review edits and deletions
+  - Verified with automated tests in `OrderAndReviewIntegrationTest`
+- [x] **Phase 9: Frontend Integration** (Completed)
+  - Connected live flows across React frontend (Vite, TailwindCSS, Zustand, Axios, React Router)
+  - Resolved DTO and schema contract alignment:
+    - Bi-directional product attribute aliases (`organic` / `isOrganic`, `gallery` / `images`)
+    - Order summary and items alignment (`items` / `orderItems`, `shippingAddress` / `address`)
+    - Address aliases (`addressLine1` / `street`, `pincode` / `zipCode`, `phoneNumber` / `phone`)
+    - User response aliases (`name` / `fullName`, `phone` / `phoneNumber`)
+  - Updated `ProductDetail.jsx` to fetch and render real reviews from `/api/products/${id}/reviews` and submit new authenticated reviews
+  - Updated `Checkout.jsx` to select Cash on Delivery (COD) as the default V1 payment method, showing real order totals and pending payment notices (removing simulated Razorpay)
+  - Updated `OrderDetail.jsx` to dynamically render `order.paymentMethod` and `order.paymentStatus`
+  - Added `/account/orders/:id` route in `router/index.jsx` mapping to `OrderDetail` component
+  - Added `logoutUser` alias in `useAuthStore.js` for seamless account management
+  - Validated frontend build: `npm run build` completed with 0 errors and output generated in `frontend/dist/`
+- [x] **Phase 10: V1 Testing and Hardening** (Completed)
+  - Comprehensive integration test suite across all 10 phases:
+    - `AuthAndProfileIntegrationTest` (4 tests): Registration, duplicate prevention, login, JWT issuance, profile retrieval & update
+    - `CartWishlistAddressIntegrationTest` (3 tests): Cart addition & stock checks, wishlist idempotency, address CRUD & default management
+    - `CatalogIntegrationTest` (6 tests): Category CRUD & deactivation, product search & multi-attribute filters, price validation
+    - `OrderAndReviewIntegrationTest` (3 tests): Order creation from cart, GST & shipping calculation, status transitions & cancellation, review management & product rating recalculation
+    - `ViloraApplicationTests` (1 test): Spring context & persistence verification
+  - Maven test execution: 17 of 17 tests passed (0 failures, 0 errors, 0 skipped)
+  - Production JAR packaging: `mvn package` created `vilora-0.0.1-SNAPSHOT.jar` successfully
+  - Verified environment variable configuration and local development fallback
+  - Hardened production configuration:
+    - Added `application-prod.properties` ensuring fast failure when `SPRING_DATASOURCE_URL` is omitted, eliminating silent H2 fallback in production
+    - Added `AdminBootstrapConfig` for secure, environment-variable-driven admin provisioning (`ADMIN_BOOTSTRAP_EMAIL` & `ADMIN_BOOTSTRAP_PASSWORD`)
+    - Implemented live `Wishlist.jsx` with real store integration and fixed heart toggle ID matching in `ProductCard.jsx`
+
+

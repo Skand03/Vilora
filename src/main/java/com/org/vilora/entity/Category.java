@@ -1,6 +1,7 @@
 package com.org.vilora.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,47 +10,29 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
-@Table(
-        name = "categories",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "name")
-        }
-)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @JsonProperty("id")
     private UUID id;
 
-    @Column(nullable = false, unique = true)
+    @JsonProperty("name")
     private String name;
 
-    @Column(length = 500)
+    @JsonProperty("description")
     private String description;
 
-    @Column(nullable = false)
+    @JsonProperty("active")
+    @Builder.Default
     private Boolean active = true;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        createdAt = now;
-        updatedAt = now;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
 }

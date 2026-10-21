@@ -30,7 +30,7 @@ const Field = ({ label, type = 'text', value, onChange, error, icon: Icon, child
 
 const Login = () => {
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);
+  const loginUser = useAuthStore((state) => state.loginUser);
   const [form, setForm] = useState({ email: '', password: '', remember: false });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -51,7 +51,7 @@ const Login = () => {
     return nextErrors;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const nextErrors = validate();
     if (Object.keys(nextErrors).length) {
@@ -59,11 +59,14 @@ const Login = () => {
       return;
     }
     setLoading(true);
-    window.setTimeout(() => {
-      login({ name: 'Test User' }, 'dummy');
+    const result = await loginUser(form.email, form.password);
+    if (result && result.success) {
       toast.success('Welcome back to Vilora.');
       navigate('/account');
-    }, 700);
+    } else {
+      toast.error(result?.message || 'Invalid email or password.');
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,7 +93,7 @@ const Login = () => {
               <button type="submit" disabled={loading} className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 font-semibold text-forest-deep shadow-sm transition hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-70">{loading ? <><span className="h-5 w-5 animate-spin rounded-full border-2 border-forest-deep/30 border-t-forest-deep" />Signing in...</> : <>Sign In <FiArrowRight /></>}</button>
             </form>
             <div className="my-7 flex items-center gap-4 text-xs text-forest/45"><span className="h-px flex-1 bg-gold/25" />or continue with<span className="h-px flex-1 bg-gold/25" /></div>
-            <button type="button" onClick={() => { login({ name: 'Test User' }, 'dummy'); navigate('/account'); }} className="flex min-h-[52px] w-full items-center justify-center gap-3 rounded-lg border border-forest bg-white px-6 py-3 font-semibold text-forest transition hover:bg-sage"><FcGoogle className="text-xl" />Continue with Google</button>
+            <button type="button" onClick={() => toast('Google Sign-in is coming in V2. Please use email and password.', { icon: 'ℹ️' })} className="flex min-h-[52px] w-full items-center justify-center gap-3 rounded-lg border border-forest bg-white px-6 py-3 font-semibold text-forest transition hover:bg-sage"><FcGoogle className="text-xl" />Continue with Google</button>
             <div className="mt-8 text-center text-sm text-forest/65"><span>Don&apos;t have an account? </span><Link to="/register" className="font-semibold text-gold hover:underline">Create one →</Link><p className="mt-5 text-xs text-forest/50">🔒 Your data is protected with 256-bit SSL</p></div>
           </div>
         </section>

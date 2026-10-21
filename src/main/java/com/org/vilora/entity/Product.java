@@ -1,6 +1,8 @@
 package com.org.vilora.entity;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,72 +10,85 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(
-        name = "products",
-        indexes = {
-                @Index(name = "idx_product_name", columnList = "name"),
-                @Index(name = "idx_product_price", columnList = "price"),
-                @Index(name = "idx_product_rating", columnList = "rating"),
-                @Index(name = "idx_product_in_stock", columnList = "in_stock")
-        }
-)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @JsonProperty("id")
     private UUID id;
 
-    @Column(nullable = false, length = 150)
+    @JsonProperty("name")
     private String name;
 
-    @Column(length = 2000)
+    @JsonProperty("description")
     private String description;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @JsonProperty("image")
+    private String image;
+
+    @JsonProperty("images")
+    @Builder.Default
+    private List<String> images = new ArrayList<>();
+
+    @JsonProperty("ingredients")
+    private String ingredients;
+
+    @JsonProperty("nutrition")
+    private String nutrition;
+
+    @JsonProperty("price")
     private BigDecimal price;
 
-    @Column(name = "original_price", precision = 10, scale = 2)
+    @JsonProperty("original_price")
+    @JsonAlias({"originalPrice"})
     private BigDecimal originalPrice;
 
-    @Column(precision = 3, scale = 2)
+    @JsonProperty("rating")
+    @Builder.Default
     private BigDecimal rating = BigDecimal.ZERO;
 
-    @Column(name = "review_count", nullable = false)
+    @JsonProperty("review_count")
+    @JsonAlias({"reviewCount"})
+    @Builder.Default
     private Integer reviewCount = 0;
 
-    @Column(name = "in_stock", nullable = false)
+    @JsonProperty("stock_quantity")
+    @JsonAlias({"stockQuantity", "stock"})
+    @Builder.Default
+    private Integer stockQuantity = 100;
+
+    @JsonProperty("in_stock")
+    @JsonAlias({"inStock"})
+    @Builder.Default
     private Boolean inStock = true;
 
-    @Column(name = "is_organic", nullable = false)
+    @JsonProperty("is_organic")
+    @JsonAlias({"organic", "isOrganic"})
+    @Builder.Default
     private Boolean organic = false;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JsonProperty("category_id")
+    @JsonAlias({"categoryId"})
+    private UUID categoryId;
+
+    // Transient populated reference for convenience
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Category category;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", nullable = false)
+    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        LocalDateTime now = LocalDateTime.now();
-        createdAt = now;
-        updatedAt = now;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
+    public boolean isAvailable(int requestedQuantity) {
+        return Boolean.TRUE.equals(inStock) && stockQuantity != null && stockQuantity >= requestedQuantity;
     }
 }

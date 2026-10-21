@@ -34,3 +34,14 @@ build/
 ### VS Code ###
 .vscode/
 /bin/
+
+### Environment and Secrets ###
+.env
+*.env
+application-local.properties
+application-production.properties
+
+### Temporary & Archives ###
+*.zip
+scratch/
+.DS_Store

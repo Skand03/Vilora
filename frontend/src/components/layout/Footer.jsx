@@ -5,20 +5,20 @@ import { FaFacebookF, FaInstagram, FaYoutube, FaEnvelope, FaPhone, FaMapMarkerAl
 const Footer = () => {
   const quickLinks = [
     { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-    { name: 'Track Order', path: '/track-order' },
-    { name: 'FAQs', path: '/faqs' },
-    { name: 'Shipping Policy', path: '/shipping' },
-    { name: 'Return Policy', path: '/returns' },
+    { name: 'Contact & Support', path: '/contact' },
+    { name: 'Privacy Policy', path: '/privacy-policy' },
+    { name: 'Terms & Conditions', path: '/terms' },
+    { name: 'FAQs & Help', path: '/faq' },
+    { name: 'Shipping Policy', path: '/shipping-policy' },
+    { name: 'Return & Refund Policy', path: '/return-refund-policy' },
   ];
 
   const categories = [
-    { name: 'Skincare', path: '/shop?category=skincare' },
-    { name: 'Haircare', path: '/shop?category=haircare' },
-    { name: 'Body Care', path: '/shop?category=bodycare' },
-    { name: 'Essential Oils', path: '/shop?category=essential-oils' },
-    { name: 'Gift Sets', path: '/shop?category=gifts' },
-    { name: 'Best Sellers', path: '/shop?filter=bestsellers' },
+    { name: 'All Dry Fruits & Nuts', path: '/shop' },
+    { name: 'California Almonds & Cashews', path: '/shop?category=Premium%20Dry%20Fruits%20%26%20Nuts' },
+    { name: 'Medjool Dates & Figs', path: '/shop?category=Exotic%20Dates%20%26%20Figs' },
+    { name: 'Dried Berries & Raisins', path: '/shop?category=Dried%20Berries%20%26%20Raisins' },
+    { name: 'Super Seeds & Trail Mixes', path: '/shop?category=Seeds%20%26%20Healthy%20Mixes' },
   ];
 
   return (

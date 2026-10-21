@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import { FaFlask, FaLeaf, FaQuoteLeft, FaShippingFast } from 'react-icons/fa';
@@ -7,27 +7,15 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import toast from 'react-hot-toast';
 import { PageWrapper, ProductCard, Button, Badge, StarRating } from '../components';
+import api from '../api';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 const categories = [
-  { name: 'Dry Fruits', image: 'https://images.unsplash.com/photo-1599599810694-b5acdd5d5b8d?auto=format&fit=crop&w=320&q=80' },
-  { name: 'Herbs & Spices', image: 'https://images.unsplash.com/photo-1532336414038-cf19250c5757?auto=format&fit=crop&w=320&q=80' },
-  { name: 'Oils & Ghee', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=320&q=80' },
-  { name: 'Superfoods', image: 'https://images.unsplash.com/photo-1515543904379-3d757afe72e4?auto=format&fit=crop&w=320&q=80' },
-  { name: 'Teas', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=320&q=80' },
-  { name: 'Gift Sets', image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=320&q=80' },
-];
-
-const products = [
-  { id: 1, name: 'Himalayan Almonds', description: 'Crunchy, naturally sweet and rich in good fats.', image: 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=600&q=80', price: 649, originalPrice: 799, discount: 19, rating: 4.8, reviewCount: 124, isOrganic: true, inStock: true },
-  { id: 2, name: 'Wild Forest Honey', description: 'Raw, unfiltered honey gathered from wild blossoms.', image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=600&q=80', price: 499, originalPrice: 599, discount: 17, rating: 4.9, reviewCount: 98, isOrganic: true, inStock: true },
-  { id: 3, name: 'Cold Pressed Coconut Oil', description: 'Virgin coconut oil pressed fresh for everyday rituals.', image: 'https://images.unsplash.com/photo-1608571423539-e951a2bfc1f9?auto=format&fit=crop&w=600&q=80', price: 389, originalPrice: 449, discount: 13, rating: 4.7, reviewCount: 76, isOrganic: true, inStock: true },
-  { id: 4, name: 'Golden Turmeric Powder', description: 'Sun-dried Lakadong turmeric with vibrant warmth.', image: 'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=600&q=80', price: 249, originalPrice: 299, discount: 17, rating: 4.8, reviewCount: 142, isOrganic: true, inStock: true },
-  { id: 5, name: 'Moringa Leaf Powder', description: 'A gentle green boost for smoothies and daily wellness.', image: 'https://images.unsplash.com/photo-1515586000433-45406d8e6662?auto=format&fit=crop&w=600&q=80', price: 299, originalPrice: 349, discount: 14, rating: 4.6, reviewCount: 63, isOrganic: true, inStock: true },
-  { id: 6, name: 'Rose Green Tea', description: 'Delicate rose petals blended with handpicked green tea.', image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80', price: 429, originalPrice: 499, discount: 14, rating: 4.7, reviewCount: 51, isOrganic: true, inStock: true },
-  { id: 7, name: 'A2 Cow Ghee', description: 'Small-batch cultured ghee with a rich golden finish.', image: 'https://images.unsplash.com/photo-1631294228801-5b7d1c4f2fa8?auto=format&fit=crop&w=600&q=80', price: 899, originalPrice: 999, discount: 10, rating: 4.9, reviewCount: 87, isOrganic: true, inStock: true },
-  { id: 8, name: 'Daily Wellness Box', description: 'A considered collection of nourishing everyday essentials.', image: 'https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=600&q=80', price: 1199, originalPrice: 1399, discount: 14, rating: 4.8, reviewCount: 39, isOrganic: true, inStock: true },
+  { name: 'Dry Fruits & Nuts', filter: 'Premium Dry Fruits & Nuts', image: 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=400&q=80' },
+  { name: 'Exotic Dates & Figs', filter: 'Exotic Dates & Figs', image: 'https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=400&q=80' },
+  { name: 'Dried Berries', filter: 'Dried Berries & Raisins', image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=400&q=80' },
+  { name: 'Seeds & Mixes', filter: 'Seeds & Healthy Mixes', image: 'https://images.unsplash.com/photo-1514733670139-4d87a1941d55?auto=format&fit=crop&w=400&q=80' },
 ];
 
 const testimonials = [
@@ -52,6 +40,26 @@ const Home = () => {
   const whyRef = useRef(null);
   const whyInView = useInView(whyRef, { once: true, amount: 0.2 });
   const [email, setEmail] = useState('');
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchBestsellers = async () => {
+      try {
+        const { data } = await api.get('/products/search?sort=top-rated&size=8');
+        const raw = data?.data;
+        if (Array.isArray(raw)) {
+          setProducts(raw);
+        } else if (raw?.content) {
+          setProducts(raw.content);
+        } else {
+          setProducts([]);
+        }
+      } catch (error) {
+        console.error('Failed to fetch bestsellers', error);
+      }
+    };
+    fetchBestsellers();
+  }, []);
 
   const handleNewsletter = (event) => {
     event.preventDefault();
@@ -73,21 +81,21 @@ const Home = () => {
           </svg>
           <div className="relative mx-auto grid min-h-[90vh] max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-20">
             <div className="max-w-2xl">
-              <Badge variant="organic">🌿 100% Certified Organic</Badge>
-              <h1 className="mt-6 font-display text-5xl font-semibold leading-[0.95] text-white md:text-7xl">Nature&apos;s Finest,<br />Delivered to Your Door</h1>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/80">Premium organic essentials — pure, natural, and crafted with care.</p>
+              <Badge variant="organic">🌿 100% Certified Organic Dry Fruits</Badge>
+              <h1 className="mt-6 font-display text-5xl font-semibold leading-[0.95] text-white md:text-7xl">Nature&apos;s Finest Dry Fruits,<br />Delivered to Your Door</h1>
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/80">Handpicked California almonds, Jumbo cashews, Kashmiri snow-white walnuts, and exotic dates — pure, fresh, and nutrient-dense.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button size="lg" onClick={() => navigate('/shop')}>Shop Now <FiArrowRight aria-hidden="true" /></Button>
-                <Button variant="secondary" size="lg" className="border-white text-white hover:bg-white/10" onClick={() => navigate('/shop?view=categories')}>Explore Categories</Button>
+                <Button size="lg" onClick={() => navigate('/shop')}>Shop Dry Fruits <FiArrowRight aria-hidden="true" /></Button>
+                <Button variant="secondary" size="lg" className="border-white text-white hover:bg-white/10" onClick={() => navigate('/shop')}>Explore Categories</Button>
               </div>
               <div className="mt-10 grid max-w-xl grid-cols-1 gap-4 border-t border-white/15 pt-6 sm:grid-cols-3">
                 {trustItems.map(({ icon: Icon, label }) => <div key={label} className="flex items-center gap-3 text-sm text-cream/80"><Icon className="shrink-0 text-gold" aria-hidden="true" /><span>{label}</span></div>)}
               </div>
             </div>
             <div className="relative mx-auto grid w-full max-w-md grid-cols-2 gap-4 lg:max-w-lg">
-              <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&q=85" alt="Vilora organic skincare products" className="mt-12 h-64 w-full rounded-xl object-cover shadow-2xl sm:h-80" />
-              <img src="https://images.unsplash.com/photo-1611073761764-7d9e3f1a5a1f?auto=format&fit=crop&w=700&q=85" alt="Natural ingredients and botanical oils" className="h-64 w-full rounded-xl object-cover shadow-2xl sm:h-80" />
-              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-gold/50 bg-forest px-5 py-3 text-center text-xs uppercase tracking-[0.2em] text-gold">Purely considered</div>
+              <img src="https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=700&q=85" alt="Vilora organic almonds and nuts" className="mt-12 h-64 w-full rounded-xl object-cover shadow-2xl sm:h-80" />
+              <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=700&q=85" alt="Vilora royal Medjool dates" className="h-64 w-full rounded-xl object-cover shadow-2xl sm:h-80" />
+              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-gold/50 bg-forest px-5 py-3 text-center text-xs uppercase tracking-[0.2em] text-gold">Farm Fresh &amp; Vacuum Sealed</div>
             </div>
           </div>
         </section>
@@ -96,7 +104,7 @@ const Home = () => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-center font-display text-4xl font-semibold text-forest">Shop by Category</h2>
             <div className="mt-10 flex snap-x gap-8 overflow-x-auto px-2 pb-4 sm:justify-center sm:gap-10">
-              {categories.map((category) => <button type="button" key={category.name} onClick={() => navigate(`/shop?category=${encodeURIComponent(category.name)}`)} className="group flex w-[140px] shrink-0 snap-start flex-col items-center gap-3 text-center"><img src={category.image} alt={category.name} className="h-[140px] w-[140px] rounded-full border-4 border-transparent object-cover transition-all duration-300 group-hover:border-gold group-focus-visible:border-gold" /><span className="font-display text-xl font-semibold text-forest">{category.name}</span></button>)}
+              {categories.map((category) => <button type="button" key={category.name} onClick={() => navigate(`/shop?category=${encodeURIComponent(category.filter || category.name)}`)} className="group flex w-[140px] shrink-0 snap-start flex-col items-center gap-3 text-center"><img src={category.image} alt={category.name} className="h-[140px] w-[140px] rounded-full border-4 border-transparent object-cover transition-all duration-300 group-hover:border-gold group-focus-visible:border-gold shadow-md" /><span className="font-display text-xl font-semibold text-forest">{category.name}</span></button>)}
             </div>
           </div>
         </section>

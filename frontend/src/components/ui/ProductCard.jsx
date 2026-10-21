@@ -13,7 +13,7 @@ const ProductCard = ({ product, layout = 'grid' }) => {
   const addToCart = useCartStore((state) => state.addItem);
   const addToWishlist = useWishlistStore((state) => state.addItem);
   const removeFromWishlist = useWishlistStore((state) => state.removeItem);
-  const wishlisted = useWishlistStore((state) => state.items.some((item) => item.id === product.id));
+  const wishlisted = useWishlistStore((state) => state.items.some((item) => (item.productId || item.id) === product.id));
 
   const handleWishlistToggle = (e) => {
     e.stopPropagation();
@@ -44,9 +44,9 @@ const ProductCard = ({ product, layout = 'grid' }) => {
       {/* Image Area */}
       <div className={`${layout === 'list' ? 'h-auto min-h-[200px] w-[200px] shrink-0' : 'h-[240px] w-full'} relative bg-sage overflow-hidden`}>
         <img
-          src={product.image || 'https://via.placeholder.com/240'}
+          src={product.image || 'https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=600&q=80'}
           alt={product.name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Organic Badge */}
@@ -68,12 +68,12 @@ const ProductCard = ({ product, layout = 'grid' }) => {
           onClick={handleWishlistToggle}
           type="button"
           aria-label={wishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-          className="absolute top-3 right-3 bg-white/90 hover:bg-white rounded-full p-2 transition-all"
+          className="absolute top-3 right-3 bg-white/95 hover:bg-white rounded-full p-2.5 shadow-md transition-all duration-200 hover:scale-110 active:scale-90 z-10 flex items-center justify-center group"
         >
           {wishlisted ? (
-            <FaHeart className="text-gold text-xl" />
+            <FaHeart className="text-red-500 fill-red-500 text-lg transition-transform animate-scale" />
           ) : (
-            <FaRegHeart className="text-forest text-xl" />
+            <FaRegHeart className="text-forest/70 group-hover:text-red-500 text-lg transition-colors" />
           )}
         </button>
 

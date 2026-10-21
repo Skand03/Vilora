@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiSearch, FiShoppingCart, FiHeart, FiMenu, FiUser } from 'react-icons/fi';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
+import { AnimatePresence } from 'framer-motion';
 import useCartStore from '../../store/useCartStore';
 import useWishlistStore from '../../store/useWishlistStore';
 import useAuthStore from '../../store/useAuthStore';
@@ -13,15 +14,26 @@ const Navbar = () => {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   const cartCount = useCartStore((state) => state.cartCount());
+  const fetchCart = useCartStore((state) => state.fetchCart);
+  
   const wishlistCount = useWishlistStore((state) => state.items.length);
+  const fetchWishlist = useWishlistStore((state) => state.fetchWishlist);
+  
   const { user, isLoggedIn, logout } = useAuthStore();
+
+  useEffect(() => {
+    if (isLoggedIn()) {
+      fetchCart();
+      fetchWishlist();
+      useAuthStore.getState().fetchProfile();
+    }
+  }, [isLoggedIn, fetchCart, fetchWishlist]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'Categories', path: '/shop?view=categories' },
-    { name: 'About', path: '/about' },
-    { name: 'Blog', path: '/blog' },
+    { name: 'Dry Fruits & Nuts', path: '/shop' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const handleLogout = () => {
@@ -31,7 +43,11 @@ const Navbar = () => {
   };
 
   return (
-    <Disclosure as="nav" className="sticky top-0 z-50 bg-forest shadow-md">
+    <>
+      <div className="bg-forest-deep text-gold text-center py-1.5 px-4 text-xs font-semibold border-b border-gold/20 tracking-wide flex items-center justify-center gap-2">
+        <span>🌿 Free Express Shipping across India on orders above ₹499 | 100% Farm-Fresh Certified Organic</span>
+      </div>
+      <Disclosure as="nav" className="sticky top-0 z-50 bg-forest shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-[4.5rem]">
           {/* LEFT: Logo */}
@@ -97,23 +113,42 @@ const Navbar = () => {
             </Link>
 
             {/* Auth Section (Desktop) */}
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-3">
+              {(user?.role === 'ROLE_ADMIN' || user?.role === 'ADMIN') && (
+                <Link
+                  to="/admin"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gold/20 text-gold hover:bg-gold hover:text-forest-deep text-xs font-bold transition-all border border-gold/40 shadow-sm"
+                >
+                  🛡️ Admin
+                </Link>
+              )}
               {isLoggedIn() ? (
                 <div className="relative">
-                    <button
-                      type="button"
+                  <button
+                    type="button"
                     onClick={() => setShowUserMenu(!showUserMenu)}
                     className="flex items-center gap-2 text-white hover:text-gold transition-colors"
                   >
                     <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
                       <FiUser className="text-forest-deep" />
                     </div>
-                    <span className="hidden xl:inline">{user?.name || 'User'}</span>
+                    <span className="hidden xl:inline text-sm font-medium capitalize">
+                      {user?.fullName || user?.name || (user?.email ? user.email.split('@')[0] : 'User')}
+                    </span>
                   </button>
 
                   <AnimatePresence>
                     {showUserMenu && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border border-gold/20">
+                      <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-xl py-2 border border-gold/20 z-50">
+                        {(user?.role === 'ROLE_ADMIN' || user?.role === 'ADMIN') && (
+                          <Link
+                            to="/admin"
+                            className="block px-4 py-2 font-bold text-forest bg-pale-gold/70 hover:bg-pale-gold transition-colors border-b border-gold/20"
+                            onClick={() => setShowUserMenu(false)}
+                          >
+                            🛡️ Admin Dashboard
+                          </Link>
+                        )}
                         <Link
                           to="/account"
                           className="block px-4 py-2 text-forest hover:bg-sage transition-colors"
@@ -181,6 +216,15 @@ const Navbar = () => {
 
               {isLoggedIn() ? (
                 <>
+                  {user?.role === 'ROLE_ADMIN' && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-gold font-bold hover:text-white transition-colors py-2"
+                    >
+                      🛡️ Admin Portal
+                    </Link>
+                  )}
                   <Link
                     to="/account"
                     onClick={() => setMobileMenuOpen(false)}
@@ -222,6 +266,7 @@ const Navbar = () => {
             </div>
       </DisclosurePanel>
     </Disclosure>
+    </>
   );
 };
 
