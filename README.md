@@ -292,5 +292,117 @@ npm run build
 
 ---
 
+## ☁️ Deploying Backend on Render (Docker Runtime)
+
+Follow this step-by-step guide to deploy the Vilora Naturals Spring Boot backend to **Render** using the provided `Dockerfile`.
+
+### 1. Create a New Web Service on Render
+1. Log in to [dashboard.render.com](https://dashboard.render.com).
+2. Click **New +** and select **Web Service**.
+3. Choose **Build and deploy from a Git repository** and connect your GitHub repository (`Vilora` or `Vilora-E-commerce-Platform`).
+4. Configure the following service settings:
+   - **Name**: `vilora-backend` (or your chosen name)
+   - **Region**: Select the region closest to your Supabase project (e.g., *Singapore*, *Frankfurt*, *Oregon*).
+   - **Branch**: `main`
+   - **Root Directory**: Leave blank (defaults to repository root where `Dockerfile` and `pom.xml` reside).
+   - **Runtime**: **Docker** *(Render detects the root `Dockerfile` automatically)*.
+   - **Instance Type**: **Free** (or Starter/Standard).
+
+### 2. Configure Environment Variables in Render
+In the **Environment** section of your Render Web Service creation page (or under the **Environment** tab of an existing service), add the following environment variable keys and your real values:
+
+| Environment Variable | Required | Description / Example |
+| :--- | :---: | :--- |
+| `PORT` | Optional | Set to `10000` *(Render sets this automatically)* |
+| `SUPABASE_URL` | **Yes** | Your Supabase project URL (`https://your-project-ref.supabase.co`) |
+| `SUPABASE_KEY` | **Yes** | Supabase `service_role` key (or `anon` key) for server data access |
+| `SUPABASE_BUCKET_NAME` | **Yes** | Supabase Storage bucket for product images (`product-images`) |
+| `JWT_SECRET` | **Yes** | 64+ char HMAC-SHA-512 hex/base64 key |
+| `JWT_EXPIRATION_MS` | **Yes** | Token lifetime in ms (e.g., `86400000` for 24h) |
+| `CORS_ALLOWED_ORIGINS` | **Yes** | Your Vercel frontend URL (e.g., `https://vilora.vercel.app`) |
+| `FRONTEND_URL` | Optional | Same as `CORS_ALLOWED_ORIGINS` |
+| `ADMIN_BOOTSTRAP_EMAIL` | Optional | Seed admin email (e.g., `admin@viloranaturals.com`) |
+| `ADMIN_BOOTSTRAP_PASSWORD` | Optional | Seed admin password |
+| `ADMIN_BOOTSTRAP_NAME` | Optional | Seed admin name (e.g., `Vilora Administrator`) |
+
+> [!NOTE]
+> Render provides secure environment variable storage. Never commit real keys or secrets to Git.
+
+### 3. Advanced Settings (Health Check)
+Expand the **Advanced** section:
+- **Health Check Path**: `/api/health`
+- **Auto-Deploy**: **Yes** (deploys automatically on new pushes to `main`).
+
+Click **Create Web Service**. Render will build the Docker container and start your Spring Boot application.
+
+---
+
+## 🔗 Connecting Your Vercel Frontend to Render
+
+Your frontend is hosted on **Vercel**. To connect it to your newly deployed Render backend:
+
+1. Go to your **Vercel Dashboard** and open your Vilora project.
+2. Navigate to **Settings** ➔ **Environment Variables**.
+3. Add or update the variable:
+   - **Key**: `VITE_API_BASE_URL`
+   - **Value**: `https://your-service-name.onrender.com` *(replace with your actual Render URL, without a trailing slash)*
+4. Click **Save** and trigger a **Redeploy** on Vercel so the production bundle builds with the Render backend URL.
+
+---
+
+## 🔍 Testing & Verifying the Deployed API
+
+Once Render completes deployment (status shows **Live**), test the following endpoints in your browser, terminal, or Postman:
+
+### 1. Health Check
+```bash
+curl -X GET https://your-service-name.onrender.com/api/health
+```
+Expected response (`HTTP 200 OK`):
+```json
+{
+  "service": "Vilora Naturals API",
+  "status": "UP",
+  "timestamp": 1729573800000
+}
+```
+
+### 2. Public Catalog Verification
+```bash
+curl -X GET https://your-service-name.onrender.com/api/products
+```
+Expected response: Array of active products with prices, stock levels, and category data.
+
+### 3. Customer Authentication
+```bash
+curl -X POST https://your-service-name.onrender.com/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"skandchaubey03@gmail.com","password":"Admin@123456"}'
+```
+Expected response: Returns JWT authentication token and `ROLE_ADMIN` permissions.
+
+---
+
+## 🛠️ Common Deployment Troubleshooting
+
+### 1. Free-Tier Cold Starts
+- **Symptom**: The first API call takes 30-50 seconds to respond.
+- **Cause**: Render's free tier spins down inactive web services after 15 minutes of inactivity.
+- **Solution**: The backend automatically recovers on the first request. The frontend Axios client is configured with a 15-second timeout and retry awareness.
+
+### 2. CORS Errors in the Browser Console
+- **Symptom**: `Access to XMLHttpRequest at '...' from origin 'https://your-app.vercel.app' has been blocked by CORS policy`.
+- **Solution**: Ensure your Vercel URL is added to the `CORS_ALLOWED_ORIGINS` environment variable in your Render dashboard (e.g. `https://your-app.vercel.app`). Note that all `https://*.vercel.app` domains are allowed by default.
+
+### 3. Supabase 401 / 404 Errors
+- **Symptom**: Backend logs show `Supabase select [...] returned status 401`.
+- **Solution**: Verify that `SUPABASE_KEY` in Render matches your active Supabase **service_role** or **anon** key from Supabase Dashboard > Project Settings > API.
+
+### 4. Port Binding Issues (502 Bad Gateway)
+- **Symptom**: Render deployment fails with `Timed out waiting for port`.
+- **Solution**: Render assigns a random `PORT` environment variable (defaulting to 10000). The application is configured to automatically listen on `${PORT:-10000}`.
+
+---
+
 ## 📄 License
 This project is licensed under the [MIT License](LICENSE).

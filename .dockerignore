@@ -1,0 +1,37 @@
+# Git & IDE
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+*.iml
+
+# Frontend (Frontend is deployed independently on Vercel)
+frontend/
+node_modules/
+
+# Local Build Artifacts
+target/
+build/
+dist/
+*.class
+
+# Environment & Secrets
+.env
+*.env
+application-local.properties
+application-production.properties
+
+# Logs & Temporary Files
+logs/
+*.log
+scratch/
+*.zip
+*.pdf
+
+# Documentation & Postman
+docs/
+postman/
+PROGRESS.md
+BACKEND_IMPLEMENTATION_STATUS.md
+SETUP_COMPLETE.md

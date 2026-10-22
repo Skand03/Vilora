@@ -45,3 +45,8 @@ application-production.properties
 *.zip
 scratch/
 .DS_Store
+*.jar
+*.war
+*.log
+logs/
+uploads/

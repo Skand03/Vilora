@@ -25,7 +25,21 @@ public class DesignController {
     }
     
     @GetMapping("/")
-    public String index() {
-        return "vilora_naturals_home";
+    @org.springframework.web.bind.annotation.ResponseBody
+    public java.util.Map<String, Object> index() {
+        java.util.Map<String, Object> status = new java.util.HashMap<>();
+        status.put("status", "UP");
+        status.put("service", "Vilora Naturals API");
+        return status;
+    }
+
+    @GetMapping({"/health", "/api/health"})
+    @org.springframework.web.bind.annotation.ResponseBody
+    public java.util.Map<String, Object> health() {
+        java.util.Map<String, Object> status = new java.util.HashMap<>();
+        status.put("status", "UP");
+        status.put("service", "Vilora Naturals API");
+        status.put("timestamp", System.currentTimeMillis());
+        return status;
     }
 }

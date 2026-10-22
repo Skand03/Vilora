@@ -30,6 +30,9 @@ public class SecurityConfig {
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthFilter jwtAuthFilter;
 
+    @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins:}")
+    private String allowedOriginsEnv;
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -68,6 +71,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Public auth endpoints
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/logout").permitAll()
+                        // Public health checks, error handler, and root
+                        .requestMatchers("/", "/health", "/api/health", "/error").permitAll()
                         // Profile endpoints require authentication
                         .requestMatchers("/api/auth/me", "/api/auth/profile").authenticated()
                         // Public catalog viewing
@@ -75,7 +80,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
                         // Public media / assets
                         .requestMatchers("/uploads/**").permitAll()
-                        .requestMatchers("/design/**", "/").permitAll()
+                        .requestMatchers("/design/**").permitAll()
                         // Customer reviews submission requires authentication, not admin role
                         .requestMatchers(HttpMethod.POST, "/api/products/*/reviews").authenticated()
                         // Administrative catalog management
@@ -98,12 +103,22 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList(
+        java.util.List<String> patterns = new java.util.ArrayList<>(Arrays.asList(
                 "http://localhost:*",
                 "http://127.0.0.1:*",
+                "https://*.vercel.app",
                 "https://*.viloranaturals.com",
                 "https://viloranaturals.com"
         ));
+        if (allowedOriginsEnv != null && !allowedOriginsEnv.isBlank()) {
+            for (String origin : allowedOriginsEnv.split(",")) {
+                String trimmed = origin.trim();
+                if (!trimmed.isEmpty() && !patterns.contains(trimmed)) {
+                    patterns.add(trimmed);
+                }
+            }
+        }
+        configuration.setAllowedOriginPatterns(patterns);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
